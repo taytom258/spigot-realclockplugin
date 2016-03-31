@@ -1,0 +1,11 @@
+# RealClock Configuration File
+#
+# User Settings Section
+Lat & Lng Database Caching: true
+Time Format: yyyy-MM-dd HH:mm
+Chat Color (Number Only): '6'
+TimeZoneAPIKey: InsertKeyHere
+LogLevel (INFO,WARNING,SEVERE): WARNING
+# Development Settings Section (DO NOT TOUCH)
+Config Version (DO NOT TOUCH): 1.0
+Development (DO NOT TOUCH): false
