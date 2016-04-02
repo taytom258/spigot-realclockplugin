@@ -1,4 +1,4 @@
-# SpigotRealClockPlugin
+# Spigot Real Clock Plugin
 
 #####Issues & Questions:
 Submit all issues and questions to the issue tab above
