@@ -1,8 +1,10 @@
 package net.ddns.taytom258.SpigotRealClockPlugin;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.bukkit.plugin.java.JavaPlugin;
+import org.mcstats.Metrics;
 
 import net.ddns.taytom258.SpigotRealClockPlugin.commands.ClockCommand;
 import net.ddns.taytom258.SpigotRealClockPlugin.commands.CommandHandler;
@@ -64,6 +66,16 @@ public class Plugin extends JavaPlugin {
 		if (Configuration.api.equalsIgnoreCase("InsertKeyHere") || Configuration.api.equalsIgnoreCase("")){
 			LogHandler.severe(Strings.apierror, true);
 		}
+		
+		//Metrics Loader
+		Metrics m;
+		try {
+			m = new Metrics(this);
+			m.start();
+		} catch (IOException e) {
+			LogHandler.warning("", e);
+		}
+		
 
 	}
 

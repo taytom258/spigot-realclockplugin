@@ -17,6 +17,10 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 <id>spigot-repo</id>
 <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
 </repository>
+<repository>
+<id>Plugin Metrics</id>
+<url>http://repo.mcstats.org/content/repositories/public</url>
+</repository>
 </repositories>
 
 <dependencies>
@@ -46,6 +50,11 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 <groupId>org.json</groupId>
 <artifactId>json</artifactId>
 <version>20160212</version>
+</dependency>
+<dependency>
+<groupId>org.mcstats.bukkit</groupId>
+<artifactId>metrics</artifactId>
+<version>R8-SNAPSHOT</version>
 </dependency>
 </dependencies>
 
