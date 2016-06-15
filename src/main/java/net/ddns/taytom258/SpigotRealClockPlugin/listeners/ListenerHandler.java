@@ -24,8 +24,8 @@ public class ListenerHandler {
 	 */
 	public static void registerListener(Listener listen){
 		
-		Server server = Plugin.getPlugin(Plugin.class).getServer();
-		JavaPlugin plugin = Plugin.getPlugin(Plugin.class);
+		Server server = JavaPlugin.getPlugin(Plugin.class).getServer();
+		JavaPlugin plugin = JavaPlugin.getPlugin(Plugin.class);
 		
 		server.getPluginManager().registerEvents(listen, plugin);
 		

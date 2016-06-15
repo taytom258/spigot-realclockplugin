@@ -30,10 +30,10 @@ public class ConfigHandler {
 	 */
 	public static void init() {
 		
-		folder = Plugin.getPlugin(Plugin.class).getDataFolder();
-		log = Plugin.getPlugin(Plugin.class).getLogger();
-		config = Plugin.getPlugin(Plugin.class).getConfig();
-		plugin = Plugin.getPlugin(Plugin.class);
+		folder = JavaPlugin.getPlugin(Plugin.class).getDataFolder();
+		log = JavaPlugin.getPlugin(Plugin.class).getLogger();
+		config = JavaPlugin.getPlugin(Plugin.class).getConfig();
+		plugin = JavaPlugin.getPlugin(Plugin.class);
 	}
 
 	/**

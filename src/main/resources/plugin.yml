@@ -1,5 +1,5 @@
 name: RealClock
-version: 1.0.0
+version: 1.0.1-SNAPSHOT
 description: Provides commands for checking local time based on IP.
 author: taytom258
 

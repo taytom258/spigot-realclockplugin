@@ -68,6 +68,8 @@ public class GeoIP {
 	 *            string, IPv4 or IPv6 address for lookup
 	 * @return Latitude and Longitude in format: "Latitude;Longitude"
 	 * @see Reader
+	 * @throws IOException
+	 * @throws GeoIp2Exception
 	 */
 	public static String getLocation(String IP)
 			throws IOException, GeoIp2Exception {

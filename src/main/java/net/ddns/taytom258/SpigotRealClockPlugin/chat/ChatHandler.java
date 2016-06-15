@@ -16,12 +16,12 @@ public class ChatHandler {
 	/**
 	 * Sends message to player with color
 	 * 
-	 * @param player
+	 * @param player the player
 	 * @param color number in minecraft color code
 	 * @param message to send
 	 * @see Player
 	 */
 	public static void sendPlayer(Player player, String color, String message){
-		player.sendMessage("§".concat(color).concat(message));
+		player.sendMessage("§" + color + message);
 	}
 }

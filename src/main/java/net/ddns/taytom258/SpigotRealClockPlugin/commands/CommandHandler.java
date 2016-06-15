@@ -26,7 +26,7 @@ public class CommandHandler {
 	 */
 	public static boolean registerCommand(String command, CommandExecutor ex){
 		
-		JavaPlugin plugin = Plugin.getPlugin(Plugin.class);
+		JavaPlugin plugin = JavaPlugin.getPlugin(Plugin.class);
 		
 		if (plugin.getCommand(command) != null){
 			plugin.getCommand(command).setExecutor(ex);
