@@ -17,12 +17,19 @@ import net.ddns.taytom258.SpigotRealClockPlugin.http.TimeZoneDB;
 import net.ddns.taytom258.SpigotRealClockPlugin.logger.LogHandler;
 
 /**
+ * Sections of clock command that need to run in a separate thread
  * @author taytom258
+ * @see Runnable
+ * @see Thread
  *
  */
 public class ClockRunnable{
 		
-	public static void lookup() {
+	/**
+	 * Lookup portion of clock command
+	 * 
+	 */
+	private static void lookup() {
 	
 		String latlng = null, lat = null, lng = null, time = "Error";
 		
@@ -61,11 +68,11 @@ public class ClockRunnable{
 	}
 	
 	/**
-	 * Command cooldown
+	 * Clock command cooldown
 	 * 
 	 */
-	public static void cooldown(){
-		
+	public static void run(){
+		boolean cooldown = false;
 		//Command cooldown
 		if (!ClockCommand.bypass){
 			int cooldownTime = 60; // Time in seconds
@@ -78,7 +85,7 @@ public class ClockRunnable{
 					ChatHandler.sendPlayer(ClockCommand.player, Configuration.chatcolor, "You can not use that command for another "
 											+ secondsLeft
 											+ " seconds!");
-					ClockCommand.cooldown = true;
+					cooldown = true;
 				}else{
 					// Cooldown has expired, save new cooldown
 					ClockCommand.cooldowns.put(ClockCommand.player.getName(), System.currentTimeMillis());
@@ -88,6 +95,9 @@ public class ClockRunnable{
 				ClockCommand.cooldowns.put(ClockCommand.player.getName(), System.currentTimeMillis());
 			}
 		}
-		ClockCommand.cooldown = false;
+		if (!cooldown){
+			ChatHandler.sendPlayer(ClockCommand.player, Configuration.chatcolor, "Loading...");
+			lookup();
+		}
 	}
 }

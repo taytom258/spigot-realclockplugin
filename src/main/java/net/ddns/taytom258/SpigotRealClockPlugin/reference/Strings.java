@@ -26,4 +26,6 @@ public class Strings {
 	public static String commandconsole = "You must be a player to issue this command!";
 	public static String commandbypass = "§4You are bypassing the clock command cooldown! This is not intended, please change perms ASAP!";
 	public static String commanddeny = "§4You do not have access to that command";
+	
+	public static String reloadComplete = "Config Reloaded";
 }

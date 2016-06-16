@@ -23,7 +23,6 @@ import net.ddns.taytom258.SpigotRealClockPlugin.reference.Strings;
  * @see JavaPlugin
  *
  */
-@SuppressWarnings("unused")
 public class Plugin extends JavaPlugin {
 
 	public static String ver;

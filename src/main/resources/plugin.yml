@@ -1,5 +1,5 @@
 name: RealClock
-version: 1.0.1-SNAPSHOT
+version: 1.0.1
 description: Provides commands for checking local time based on IP.
 author: taytom258
 
@@ -14,6 +14,7 @@ commands:
            §6Usage:
            /<command> - Display local time based on IP
            /<command> ip - Display local IP used in time calculations
+           /<command> reload - Reload RealClock config file
     
 permissions:
   realclock.clock:
@@ -22,6 +23,9 @@ permissions:
   realclock.clock.ip:
     default: op
     description: Give players with op ip command
+  realclock.clock.reload:
+    default: op
+    description: Give players with op reload ability
   realclock.bypass:
     default: false
     description: This permission is only for testing

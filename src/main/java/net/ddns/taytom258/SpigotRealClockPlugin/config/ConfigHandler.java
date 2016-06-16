@@ -26,6 +26,15 @@ public class ConfigHandler {
 	private static JavaPlugin plugin;
 
 	/**
+	 * Reload Configuration
+	 */
+	public static void reload(){
+		JavaPlugin.getPlugin(Plugin.class).reloadConfig();
+		config = JavaPlugin.getPlugin(Plugin.class).getConfig();
+		checkConfig();
+	}
+	
+	/**
 	 * Initilize config variables
 	 */
 	public static void init() {
@@ -81,7 +90,6 @@ public class ConfigHandler {
 	 * Load config values from existing file
 	 */
 	private static void loadValues() {
-		config = plugin.getConfig();
 		Configuration.latlng = config.getBoolean(Configuration.path_latlng);
 		Configuration.timeformat = config.getString(Configuration.path_timeformat);
 		Configuration.chatcolor = config.getString(Configuration.path_chatcolor);

@@ -10,9 +10,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.google.api.client.util.Sleeper;
-
 import net.ddns.taytom258.SpigotRealClockPlugin.chat.ChatHandler;
+import net.ddns.taytom258.SpigotRealClockPlugin.config.ConfigHandler;
 import net.ddns.taytom258.SpigotRealClockPlugin.config.Configuration;
 import net.ddns.taytom258.SpigotRealClockPlugin.reference.Strings;
 
@@ -27,7 +26,7 @@ public class ClockCommand implements CommandExecutor {
 	public static Player player;
 	public static HashMap<String, Long> cooldowns;
 	public static boolean bypass, cooldown;
-	public static Runnable lookupRun, cooldownRun;
+	public static Runnable clockRunnable;
 
 	/**
 	 * Initialize command, run in onEnable
@@ -35,14 +34,9 @@ public class ClockCommand implements CommandExecutor {
 	public static void init(){
 		
 		cooldowns = new HashMap<String, Long>();
-		lookupRun = new Runnable() {
+		clockRunnable = new Runnable() {
 			public void run() {
-				ClockRunnable.lookup();
-			}
-		};
-		cooldownRun = new Runnable() {
-			public void run() {
-				ClockRunnable.cooldown();
+				ClockRunnable.run();
 			}
 		};
 	}
@@ -64,7 +58,7 @@ public class ClockCommand implements CommandExecutor {
 			player = (Player) sender;
 				
 			//Check for command permissions
-			boolean superperm = false, clock = false, clockIP = false;
+			boolean superperm = false, clock = false, clockIP = false, clockRe = false;
 			bypass = false;
 			if (player.hasPermission("realclock.clock.*")){
 				superperm = true;
@@ -78,35 +72,37 @@ public class ClockCommand implements CommandExecutor {
 			if (player.hasPermission("realclock.bypass")){
 				bypass = true;
 			}
-			
-			//Check for clock command
-			if ((clock || superperm) && label.equalsIgnoreCase("clock") && args.length == 0){
-				new Thread(cooldownRun).start();
-				if (cooldown){
-					return true;
-				}else{
-					ChatHandler.sendPlayer(player, Configuration.chatcolor, "Loading...");
-					new Thread(lookupRun).start();
-					return true;
-				}
+			if (player.hasPermission("realclock.reload")){
+				clockRe = true;
 			}
 			
-			//Check for ip sub command
+			//Check for base clock command
+			if ((clock || superperm) && label.equalsIgnoreCase("clock") && args.length == 0){
+				new Thread(clockRunnable, "RealClock Clock CMD").start();
+				return true;
+			}
+			
+			//Check for sub commands
 			if ((label.equalsIgnoreCase("clock") && (args.length > 0))){
+				
 				if((clockIP || superperm) && args[0].equalsIgnoreCase("ip")){
 					ChatHandler.sendPlayer(player, Configuration.chatcolor, player.getAddress().getHostString());
 					return true;
-				}else if(!args[0].equalsIgnoreCase("ip")){
-					return false;
 				}else if(args[0].equalsIgnoreCase("ip")){
 					ChatHandler.sendPlayer(player, "6", Strings.commanddeny);
 					return true;
 				}
+				
+				if(clockRe && args[0].equalsIgnoreCase("reload")){
+					ConfigHandler.reload();
+					ChatHandler.sendPlayer(player, Configuration.chatcolor, Strings.reloadComplete);
+					return true;
+				}else if(args[0].equalsIgnoreCase("reload")){
+					ChatHandler.sendPlayer(player, "6", Strings.commanddeny);
+					return true;
+				}
 			}
-			
-			//If nothing else hits
-			ChatHandler.sendPlayer(player, "6", Strings.commanddeny);
-			return true;
+			return false;
 			
 		}else{
 			
