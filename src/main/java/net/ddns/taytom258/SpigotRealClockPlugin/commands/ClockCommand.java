@@ -86,7 +86,11 @@ public class ClockCommand implements CommandExecutor {
 				if (cmd.getName().equalsIgnoreCase("realclock") && args.length > 0){
 					
 					if((clockIP || superperm) && args[0].equalsIgnoreCase("ip")){
-						ChatHandler.sendPlayer(player, Configuration.chatcolor, player.getAddress().getHostString());
+						if (player.getAddress().getHostString().equals("127.0.0.1")){
+							ChatHandler.sendPlayer(player, Configuration.chatcolor, Strings.usegoogle);
+						}else{
+							ChatHandler.sendPlayer(player, Configuration.chatcolor, player.getAddress().getHostString());
+						}
 						return true;
 					}else if(args[0].equalsIgnoreCase("ip")){
 						ChatHandler.sendPlayer(player, "6", Strings.commanddeny);

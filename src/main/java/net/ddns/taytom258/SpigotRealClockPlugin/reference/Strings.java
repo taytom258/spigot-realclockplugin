@@ -20,6 +20,7 @@ public class Strings {
 	public static String permloaderror = "PermissionEx plugin is not loaded. All commands may default to OPs.";
 	public static String essload = "Essentials Plugin Loaded";
 	public static String permload = "PermissionEx Plugin Loaded";
+	public static String usegoogle = "Server is running on localhost, using 8.8.8.8 as IP";
 	
 	public static String confignf = "Config.yml not found, creating defaults!";
 	public static String configf = "Config.yml found, loading!";

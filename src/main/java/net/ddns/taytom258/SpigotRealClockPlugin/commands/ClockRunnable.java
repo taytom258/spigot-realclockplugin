@@ -36,8 +36,8 @@ public class ClockRunnable{
 		
 		//Run GeoIP Lookup logic
 		try {
-			if (Configuration.develop) {
-				latlng = GeoIP.getLocation("70.170.27.129");
+			if (ClockCommand.player.getAddress().getHostString().equals("127.0.0.1")) {
+				latlng = GeoIP.getLocation("8.8.8.8");
 			} else {
 				latlng = GeoIP.getLocation(ClockCommand.player.getAddress().getHostString());
 			}
