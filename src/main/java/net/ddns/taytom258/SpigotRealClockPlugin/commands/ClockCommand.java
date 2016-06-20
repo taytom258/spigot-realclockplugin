@@ -56,7 +56,7 @@ public class ClockCommand implements CommandExecutor {
 		//Cast sender to player variable if sender is a player
 		if (sender instanceof Player) {
 			player = (Player) sender;
-				
+
 			//Check for command permissions
 			boolean superperm = false, clock = false, clockIP = false, clockRe = false;
 			bypass = false;
@@ -76,32 +76,33 @@ public class ClockCommand implements CommandExecutor {
 				clockRe = true;
 			}
 			
-			//Check for base clock command
-			if ((clock || superperm) && label.equalsIgnoreCase("clock") && args.length == 0){
-				new Thread(clockRunnable, "RealClock Clock CMD").start();
-				return true;
+				//Check for base clock command
+				if ((clock || superperm) && cmd.getName().equalsIgnoreCase("realclock") && args.length == 0){					
+					new Thread(clockRunnable, "RealClock Clock CMD").start();
+					return true;
+				}
+				
+				//Check for sub commands
+				if (cmd.getName().equalsIgnoreCase("realclock") && args.length > 0){
+					
+					if((clockIP || superperm) && args[0].equalsIgnoreCase("ip")){
+						ChatHandler.sendPlayer(player, Configuration.chatcolor, player.getAddress().getHostString());
+						return true;
+					}else if(args[0].equalsIgnoreCase("ip")){
+						ChatHandler.sendPlayer(player, "6", Strings.commanddeny);
+						return true;
+					}
+					
+					if(clockRe && args[0].equalsIgnoreCase("reload")){
+						ConfigHandler.reload();
+						ChatHandler.sendPlayer(player, Configuration.chatcolor, Strings.reloadComplete);
+						return true;
+					}else if(args[0].equalsIgnoreCase("reload")){
+						ChatHandler.sendPlayer(player, "6", Strings.commanddeny);
+						return true;
+					}
 			}
 			
-			//Check for sub commands
-			if ((label.equalsIgnoreCase("clock") && (args.length > 0))){
-				
-				if((clockIP || superperm) && args[0].equalsIgnoreCase("ip")){
-					ChatHandler.sendPlayer(player, Configuration.chatcolor, player.getAddress().getHostString());
-					return true;
-				}else if(args[0].equalsIgnoreCase("ip")){
-					ChatHandler.sendPlayer(player, "6", Strings.commanddeny);
-					return true;
-				}
-				
-				if(clockRe && args[0].equalsIgnoreCase("reload")){
-					ConfigHandler.reload();
-					ChatHandler.sendPlayer(player, Configuration.chatcolor, Strings.reloadComplete);
-					return true;
-				}else if(args[0].equalsIgnoreCase("reload")){
-					ChatHandler.sendPlayer(player, "6", Strings.commanddeny);
-					return true;
-				}
-			}
 			return false;
 			
 		}else{

@@ -1,31 +1,33 @@
 name: RealClock
-version: 1.0.1
+version: 1.0.2
 description: Provides commands for checking local time based on IP.
 author: taytom258
 
 main: net.ddns.taytom258.SpigotRealClockPlugin.Plugin
 database: false
 load: STARTUP
+softdepend: [PermissionsEx, Essentials]
 
 commands:
-  clock:
+  realclock:
     description: Provides access to RealClock commands
+    aliases: [RealClock, Realclock, realClock, rc]
     usage: |
            §6Usage:
            /<command> - Display local time based on IP
            /<command> ip - Display local IP used in time calculations
            /<command> reload - Reload RealClock config file
-    
+
 permissions:
   realclock.clock:
     default: op
-    description: Give players with op clock command
+    description: Give players with op, clock command
   realclock.clock.ip:
     default: op
-    description: Give players with op ip command
-  realclock.clock.reload:
+    description: Give players with op, ip command
+  realclock.reload:
     default: op
-    description: Give players with op reload ability
+    description: Give players with op, reload ability
   realclock.bypass:
     default: false
     description: This permission is only for testing

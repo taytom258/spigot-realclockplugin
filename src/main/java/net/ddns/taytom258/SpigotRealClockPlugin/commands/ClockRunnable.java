@@ -15,6 +15,7 @@ import net.ddns.taytom258.SpigotRealClockPlugin.config.Configuration;
 import net.ddns.taytom258.SpigotRealClockPlugin.geoIP.GeoIP;
 import net.ddns.taytom258.SpigotRealClockPlugin.http.TimeZoneDB;
 import net.ddns.taytom258.SpigotRealClockPlugin.logger.LogHandler;
+import net.ddns.taytom258.SpigotRealClockPlugin.reference.Strings;
 
 /**
  * Sections of clock command that need to run in a separate thread
@@ -43,7 +44,7 @@ public class ClockRunnable{
 		} catch (IOException e) {
 			LogHandler.warning("", e);
 		} catch (GeoIp2Exception e) {
-			LogHandler.warning("", e);
+			LogHandler.warning(Strings.apierror, e);
 		}
 		
 		//Process GeoIP Output
@@ -60,9 +61,9 @@ public class ClockRunnable{
 		try {
 			time = TimeZoneDB.sendRequest(lat, lng);
 		} catch (URISyntaxException e) {
-			LogHandler.warning("", e);
+			LogHandler.warning("URI", e);
 		} catch (Exception e) {
-			LogHandler.warning("", e);
+			LogHandler.warning("TimeZoneDB", e);
 		}
 		ChatHandler.sendPlayer(ClockCommand.player, Configuration.chatcolor, time);
 	}

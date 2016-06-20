@@ -41,6 +41,7 @@ public class TimeZoneDB {
 	public static String sendRequest(String lat, String lng) throws Exception{
 		
 		CloseableHttpResponse response = null;
+		//System.out.println(buildURI(lat, lng).toString());
 		
 		//Open HTTP client and build GET request
 		CloseableHttpClient httpclient = HttpClients.createDefault();
@@ -71,9 +72,9 @@ public class TimeZoneDB {
 		String api = Configuration.api;
 		
 		URI uri = new URIBuilder().setScheme("http")
-				.setHost("api.timezonedb.com").setPath("/")
-				.setParameter("lat", lat).setParameter("lng", lng)
-				.setParameter("key", api).build();
+				.setHost("api.timezonedb.com").setPath("/").setParameter("key", api)
+				.setParameter("lat", lat)
+				.setParameter("lng", lng).build();
 		return uri;
 	}
 	
@@ -111,6 +112,7 @@ public class TimeZoneDB {
 	private static String convertTime(String input){
 		
 		String timestamp = StringUtils.substringBetween(input,"<timestamp>", "</timestamp>");
+		//String timezone = StringUtils.substringBetween(input,"<abbreviation>", "</abbreviation>");
 		Date date = new Date(Long.parseLong(timestamp) * 1000L); 
 		SimpleDateFormat sdf = new SimpleDateFormat(Configuration.timeformat);
 		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));

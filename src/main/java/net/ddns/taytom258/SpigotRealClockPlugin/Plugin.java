@@ -26,6 +26,7 @@ import net.ddns.taytom258.SpigotRealClockPlugin.reference.Strings;
 public class Plugin extends JavaPlugin {
 
 	public static String ver;
+	public static boolean essentials = false, permex = false;
 
 	@Override
 	public void onLoad() {
@@ -35,14 +36,30 @@ public class Plugin extends JavaPlugin {
 
 		// Log Initialization
 		LogHandler.init();
+		
+		// Config Loader
+		ConfigHandler.init();
+		ConfigHandler.checkConfig();
 	}
 	
 	@Override
 	public void onEnable() {
 		
-		// Config Loader
-		ConfigHandler.init();
-		ConfigHandler.checkConfig();
+		//Dependency Checker
+		essentials = false;
+		if (this.getServer().getPluginManager().getPlugin("Essentials") != null){
+			essentials = true;
+			LogHandler.info(Strings.essload);
+		}else{
+			//LogHandler.info(Strings.essloaderror);
+		}
+		permex = false;
+		if (this.getServer().getPluginManager().getPlugin("PermissionEx") != null){
+			permex = true;
+			LogHandler.info(Strings.permload);
+		}else{
+			//LogHandler.info(Strings.permloaderror);
+		}
 		
 		// GeoDB Checker & Initializer
 		File db = new File(Strings.geodb);
@@ -57,7 +74,7 @@ public class Plugin extends JavaPlugin {
 
 		// Register & Initialize Commands
 		ClockCommand.init();
-		CommandHandler.registerCommand("clock", new ClockCommand());
+		CommandHandler.registerCommand("realclock", new ClockCommand());
 		
 		// Register Listeners
 		ListenerHandler.registerListener(new JoinListener());

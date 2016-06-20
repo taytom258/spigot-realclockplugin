@@ -16,6 +16,10 @@ public class Strings {
 	public static String dberror = "GeoLite Database not found, creating!";
 	public static String dbsuccess = "GeoLite Database Found!";
 	public static String apierror = "TimeZoneDB API key not set. Plugin will not work without this.";
+	public static String essloaderror = "Essentials is not loaded. Some functionality may be different then expected.";
+	public static String permloaderror = "PermissionEx plugin is not loaded. All commands may default to OPs.";
+	public static String essload = "Essentials Plugin Loaded";
+	public static String permload = "PermissionEx Plugin Loaded";
 	
 	public static String confignf = "Config.yml not found, creating defaults!";
 	public static String configf = "Config.yml found, loading!";
