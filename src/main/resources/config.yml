@@ -7,5 +7,6 @@ Chat Color (Number Only): '6'
 TimeZoneAPIKey: InsertKeyHere
 LogLevel (INFO,WARNING,SEVERE): WARNING
 # Development Settings Section (DO NOT TOUCH)
-Config Version (DO NOT TOUCH): 1.0
+Config Version (DO NOT TOUCH): 1.1
 Development (DO NOT TOUCH): false
+MM (DO NOT TOUCH): false

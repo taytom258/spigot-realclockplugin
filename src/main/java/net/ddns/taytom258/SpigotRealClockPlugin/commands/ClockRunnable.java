@@ -72,7 +72,7 @@ public class ClockRunnable{
 	 * Clock command cooldown
 	 * 
 	 */
-	public static void run(){
+	public static void clock(){
 		boolean cooldown = false;
 		//Command cooldown
 		if (!ClockCommand.bypass){

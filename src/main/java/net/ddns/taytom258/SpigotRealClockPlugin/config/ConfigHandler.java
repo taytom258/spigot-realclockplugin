@@ -4,6 +4,7 @@
 package net.ddns.taytom258.SpigotRealClockPlugin.config;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.logging.Logger;
 
 import org.bukkit.configuration.file.FileConfiguration;
@@ -34,6 +35,10 @@ public class ConfigHandler {
 		checkConfig();
 	}
 	
+	public static void save() throws IOException{
+		JavaPlugin.getPlugin(Plugin.class).getConfig().save(new File(folder, "config.yml"));
+	}
+	
 	/**
 	 * Initilize config variables
 	 */
@@ -41,7 +46,6 @@ public class ConfigHandler {
 		
 		folder = JavaPlugin.getPlugin(Plugin.class).getDataFolder();
 		log = JavaPlugin.getPlugin(Plugin.class).getLogger();
-		config = JavaPlugin.getPlugin(Plugin.class).getConfig();
 		plugin = JavaPlugin.getPlugin(Plugin.class);
 	}
 
@@ -69,6 +73,7 @@ public class ConfigHandler {
 			log.info(Strings.confignf);
 			makeDefaults();
 		} else {
+			config = JavaPlugin.getPlugin(Plugin.class).getConfig();
 			log.info(Strings.configf);
 			Configuration.ver = config.getDouble(Configuration.path_ver);
 			if (Configuration.ver != Double.parseDouble(Plugin.ver)) {
@@ -84,6 +89,7 @@ public class ConfigHandler {
 	 */
 	private static void makeDefaults() {
 		plugin.saveDefaultConfig();
+		config = JavaPlugin.getPlugin(Plugin.class).getConfig();
 	}
 
 	/**
@@ -96,6 +102,7 @@ public class ConfigHandler {
 		Configuration.develop = config.getBoolean(Configuration.path_develop);
 		Configuration.api = config.getString(Configuration.path_api);
 		Configuration.log = config.getString(Configuration.path_log);
+		Plugin.mmenable = config.getBoolean(Configuration.path_mm);
 	}
 
 }

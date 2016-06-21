@@ -3,6 +3,8 @@ package net.ddns.taytom258.SpigotRealClockPlugin;
 import java.io.File;
 import java.io.IOException;
 
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mcstats.Metrics;
 
@@ -13,6 +15,7 @@ import net.ddns.taytom258.SpigotRealClockPlugin.config.Configuration;
 import net.ddns.taytom258.SpigotRealClockPlugin.geoIP.GeoIP;
 import net.ddns.taytom258.SpigotRealClockPlugin.listeners.JoinListener;
 import net.ddns.taytom258.SpigotRealClockPlugin.listeners.ListenerHandler;
+import net.ddns.taytom258.SpigotRealClockPlugin.listeners.PingProtocolEvent;
 import net.ddns.taytom258.SpigotRealClockPlugin.logger.LogHandler;
 import net.ddns.taytom258.SpigotRealClockPlugin.reference.Strings;
 
@@ -27,12 +30,14 @@ public class Plugin extends JavaPlugin {
 
 	public static String ver;
 	public static boolean essentials = false, permex = false;
+	public static boolean mmenable = false;
 
 	@Override
 	public void onLoad() {
 		
+		
 		// Plugin properties
-		ver = "1.0";
+		ver = "1.1";
 
 		// Log Initialization
 		LogHandler.init();
@@ -79,6 +84,10 @@ public class Plugin extends JavaPlugin {
 		// Register Listeners
 		ListenerHandler.registerListener(new JoinListener());
 		
+		this.saveResource(Strings.icon, true);
+		PingProtocolEvent listener = new PingProtocolEvent();
+		listener.addPingResponsePacketListener();
+		
 		//TimeZoneDB Checker
 		if (Configuration.api.equalsIgnoreCase("InsertKeyHere") || Configuration.api.equalsIgnoreCase("")){
 			LogHandler.severe(Strings.apierror, true);
@@ -102,5 +111,13 @@ public class Plugin extends JavaPlugin {
 		GeoIP.deinit();
 		ClockCommand.deinit();
 	}
+	
+	public static void kick() {
+	    for(Player player : Bukkit.getOnlinePlayers()) {
+            if (!player.hasPermission("realclock.mm.bypass")) {
+                    player.kickPlayer("§cServer undergoing maintenance");
+            }
+	    }
+    }
 
 }

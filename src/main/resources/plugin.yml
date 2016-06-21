@@ -1,11 +1,12 @@
 name: RealClock
-version: 1.0.2
+version: 1.1.0-SNAPSHOT
 description: Provides commands for checking local time based on IP.
 author: taytom258
 
 main: net.ddns.taytom258.SpigotRealClockPlugin.Plugin
 database: false
 load: STARTUP
+depend: [ProtocolLib]
 softdepend: [PermissionsEx, Essentials]
 
 commands:

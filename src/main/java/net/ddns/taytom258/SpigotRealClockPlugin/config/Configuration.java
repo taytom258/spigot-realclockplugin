@@ -20,6 +20,7 @@ public class Configuration {
 	public static String path_chatcolor = "Chat Color (Number Only)";
 	public static String path_api = "TimeZoneAPIKey";
 	public static String path_log = "LogLevel (INFO,WARNING,SEVERE)";
+	public static String path_mm = "MM (DO NOT TOUCH)";
 	
 	// Config
 	public static double ver;

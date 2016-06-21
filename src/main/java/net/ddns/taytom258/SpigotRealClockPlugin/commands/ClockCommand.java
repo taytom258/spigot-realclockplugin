@@ -3,16 +3,20 @@
  */
 package net.ddns.taytom258.SpigotRealClockPlugin.commands;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 
+import net.ddns.taytom258.SpigotRealClockPlugin.Plugin;
 import net.ddns.taytom258.SpigotRealClockPlugin.chat.ChatHandler;
 import net.ddns.taytom258.SpigotRealClockPlugin.config.ConfigHandler;
 import net.ddns.taytom258.SpigotRealClockPlugin.config.Configuration;
+import net.ddns.taytom258.SpigotRealClockPlugin.logger.LogHandler;
 import net.ddns.taytom258.SpigotRealClockPlugin.reference.Strings;
 
 /**
@@ -26,19 +30,25 @@ public class ClockCommand implements CommandExecutor {
 	public static Player player;
 	public static HashMap<String, Long> cooldowns;
 	public static boolean bypass, cooldown;
-	public static Runnable clockRunnable;
+	public static Runnable clockRunnable, mmrunnable;
 
 	/**
 	 * Initialize command, run in onEnable
 	 */
 	public static void init(){
 		
+		
 		cooldowns = new HashMap<String, Long>();
 		clockRunnable = new Runnable() {
 			public void run() {
-				ClockRunnable.run();
+				ClockRunnable.clock();
 			}
 		};
+//		mmrunnable = new Runnable() {
+//			public void run() {
+//				ClockRunnable.mm();
+//			}
+//		};
 	}
 	
 	/**
@@ -58,7 +68,7 @@ public class ClockCommand implements CommandExecutor {
 			player = (Player) sender;
 
 			//Check for command permissions
-			boolean superperm = false, clock = false, clockIP = false, clockRe = false;
+			boolean superperm = false, clock = false, clockIP = false, clockRe = false, mm = false;
 			bypass = false;
 			if (player.hasPermission("realclock.clock.*")){
 				superperm = true;
@@ -75,36 +85,48 @@ public class ClockCommand implements CommandExecutor {
 			if (player.hasPermission("realclock.reload")){
 				clockRe = true;
 			}
+			if (player.hasPermission("realclock.mm.toggle")){
+				mm = true;
+			}
 			
 				//Check for base clock command
-				if ((clock || superperm) && cmd.getName().equalsIgnoreCase("realclock") && args.length == 0){					
-					new Thread(clockRunnable, "RealClock Clock CMD").start();
+			if ((clock || superperm) && cmd.getName().equalsIgnoreCase("realclock") && args.length == 0){					
+				new Thread(clockRunnable, "RealClock Clock CMD").start();
+				return true;
+			}
+				
+				//Check for sub commands
+			if (cmd.getName().equalsIgnoreCase("realclock") && args.length > 0){
+				
+				if((clockIP || superperm) && args[0].equalsIgnoreCase("ip")){
+					if (player.getAddress().getHostString().equals("127.0.0.1")){
+						ChatHandler.sendPlayer(player, Configuration.chatcolor, Strings.usegoogle);
+					}else{
+						ChatHandler.sendPlayer(player, Configuration.chatcolor, player.getAddress().getHostString());
+					}
+					return true;
+				}else if(args[0].equalsIgnoreCase("ip")){
+					ChatHandler.sendPlayer(player, "6", Strings.commanddeny);
 					return true;
 				}
 				
-				//Check for sub commands
-				if (cmd.getName().equalsIgnoreCase("realclock") && args.length > 0){
-					
-					if((clockIP || superperm) && args[0].equalsIgnoreCase("ip")){
-						if (player.getAddress().getHostString().equals("127.0.0.1")){
-							ChatHandler.sendPlayer(player, Configuration.chatcolor, Strings.usegoogle);
-						}else{
-							ChatHandler.sendPlayer(player, Configuration.chatcolor, player.getAddress().getHostString());
-						}
-						return true;
-					}else if(args[0].equalsIgnoreCase("ip")){
-						ChatHandler.sendPlayer(player, "6", Strings.commanddeny);
-						return true;
-					}
-					
-					if(clockRe && args[0].equalsIgnoreCase("reload")){
-						ConfigHandler.reload();
-						ChatHandler.sendPlayer(player, Configuration.chatcolor, Strings.reloadComplete);
-						return true;
-					}else if(args[0].equalsIgnoreCase("reload")){
-						ChatHandler.sendPlayer(player, "6", Strings.commanddeny);
-						return true;
-					}
+				if(clockRe && args[0].equalsIgnoreCase("reload")){
+					ConfigHandler.reload();
+					ChatHandler.sendPlayer(player, Configuration.chatcolor, Strings.reloadComplete);
+					return true;
+				}else if(args[0].equalsIgnoreCase("reload")){
+					ChatHandler.sendPlayer(player, "6", Strings.commanddeny);
+					return true;
+				}
+				
+				if(mm && args[0].equalsIgnoreCase("mm")){
+//					new Thread(mmrunnable, "RealClock MM CMD").start();
+					mm();
+					return true;
+				}else if(args[0].equalsIgnoreCase("mm")){
+					ChatHandler.sendPlayer(player, "6", Strings.commanddeny);
+					return true;
+				}
 			}
 			
 			return false;
@@ -114,6 +136,47 @@ public class ClockCommand implements CommandExecutor {
 			//If anything other then a player sends the command
 			sender.sendMessage(Strings.commandconsole);
 			return true;
+		}
+	}
+	
+	private static void mm(){
+		if (!Plugin.mmenable){
+//			ChatHandler.sendPlayer(ClockCommand.player, Configuration.chatcolor, Strings.mmenabling);
+//	        //Bukkit.getServer().broadcastMessage(Strings.mmenabling);
+//	        try {
+//	            Thread.sleep(1000);
+//	        } catch (InterruptedException e) {
+//	            LogHandler.warning("InterruptedException", e);
+//	        }
+//	        for (int i = 10; i > 0; i--) {
+//	                //Bukkit.getServer().broadcastMessage(Messages.colour(format(parent.getCountdownMessage(), i)));
+//	            try {
+//	                Thread.sleep(1000);
+//	            } catch (InterruptedException e) {
+//	            	LogHandler.warning("InterruptedException", e);
+//	            }
+//	            if (i == 1) {
+	                Plugin.kick();
+	                Plugin.mmenable = true;
+	                JavaPlugin.getPlugin(Plugin.class).getConfig().set(Configuration.path_mm, true);
+	                try {
+						ConfigHandler.save();
+					} catch (IOException e) {
+						LogHandler.warning("IOException", e);
+					}
+	                ChatHandler.sendPlayer(ClockCommand.player, Configuration.chatcolor, Strings.mmenabled);
+	                //Bukkit.getServer().broadcastMessage(Strings.mmenabled);
+//	            }
+//	        }
+		}else if (Plugin.mmenable){
+			Plugin.mmenable = false;
+			JavaPlugin.getPlugin(Plugin.class).getConfig().set(Configuration.path_mm, false);
+            try {
+				ConfigHandler.save();
+			} catch (IOException e) {
+				LogHandler.warning("IOException", e);
+			}
+			ChatHandler.sendPlayer(ClockCommand.player, Configuration.chatcolor, Strings.mmdisabled);
 		}
 	}
 }
