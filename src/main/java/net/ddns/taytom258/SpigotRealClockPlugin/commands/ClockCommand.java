@@ -9,6 +9,7 @@ import java.util.HashMap;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -28,6 +29,7 @@ import net.ddns.taytom258.SpigotRealClockPlugin.reference.Strings;
 public class ClockCommand implements CommandExecutor {
 
 	public static Player player;
+	public static ConsoleCommandSender console;
 	public static HashMap<String, Long> cooldowns;
 	public static boolean bypass, cooldown;
 	public static Runnable clockRunnable, mmrunnable;
@@ -121,7 +123,7 @@ public class ClockCommand implements CommandExecutor {
 				
 				if(mm && args[0].equalsIgnoreCase("mm")){
 //					new Thread(mmrunnable, "RealClock MM CMD").start();
-					mm();
+					mm(player);
 					return true;
 				}else if(args[0].equalsIgnoreCase("mm")){
 					ChatHandler.sendPlayer(player, "6", Strings.commanddeny);
@@ -131,15 +133,31 @@ public class ClockCommand implements CommandExecutor {
 			
 			return false;
 			
-		}else{
+		}else if (sender instanceof ConsoleCommandSender && args.length != 0){
 			
-			//If anything other then a player sends the command
+			console = (ConsoleCommandSender) sender;
+			if(args[0].equalsIgnoreCase("reload")){
+				ConfigHandler.reload();
+				ChatHandler.sendConsole(console, Configuration.chatcolor, Strings.reloadComplete);
+				return true;
+			}
+			
+			if(args[0].equalsIgnoreCase("mm")){
+				mm(console);
+				return true;
+			}
+			
+			sender.sendMessage(Strings.commandconsole);
+			return true;
+			
+		}else{
+			//If anything other then a player or the console sends the command
 			sender.sendMessage(Strings.commandconsole);
 			return true;
 		}
 	}
 	
-	private static void mm(){
+	private static void mm(CommandSender sender){
 		if (!Plugin.mmenable){
 //			ChatHandler.sendPlayer(ClockCommand.player, Configuration.chatcolor, Strings.mmenabling);
 //	        //Bukkit.getServer().broadcastMessage(Strings.mmenabling);
@@ -164,7 +182,7 @@ public class ClockCommand implements CommandExecutor {
 					} catch (IOException e) {
 						LogHandler.warning("IOException", e);
 					}
-	                ChatHandler.sendPlayer(ClockCommand.player, Configuration.chatcolor, Strings.mmenabled);
+	                sender.sendMessage("§" + Configuration.chatcolor + Strings.mmenabled);
 	                //Bukkit.getServer().broadcastMessage(Strings.mmenabled);
 //	            }
 //	        }
@@ -176,7 +194,7 @@ public class ClockCommand implements CommandExecutor {
 			} catch (IOException e) {
 				LogHandler.warning("IOException", e);
 			}
-			ChatHandler.sendPlayer(ClockCommand.player, Configuration.chatcolor, Strings.mmdisabled);
+            sender.sendMessage("§" + Configuration.chatcolor + Strings.mmdisabled);
 		}
 	}
 }

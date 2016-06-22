@@ -3,6 +3,7 @@
  */
 package net.ddns.taytom258.SpigotRealClockPlugin.chat;
 
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
 /**
@@ -23,5 +24,9 @@ public class ChatHandler {
 	 */
 	public static void sendPlayer(Player player, String color, String message){
 		player.sendMessage("§" + color + message);
+	}
+	
+	public static void sendConsole(ConsoleCommandSender console, String color, String message){
+		console.sendMessage("§" + color + message);
 	}
 }
