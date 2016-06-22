@@ -114,10 +114,12 @@ public class Plugin extends JavaPlugin {
 	
 	public static void kick() {
 	    for(Player player : Bukkit.getOnlinePlayers()) {
-            if (!player.hasPermission("realclock.mm.bypass")) {
-                    player.kickPlayer("§cServer undergoing maintenance");
-            }
+	    	
+            if (player.isOp() || player.hasPermission("realclock.mm.bypass")) {
+            	return;
+            }else{
+            	player.kickPlayer("§cServer undergoing maintenance");
+            } 
 	    }
     }
-
 }

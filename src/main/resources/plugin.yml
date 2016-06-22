@@ -18,6 +18,7 @@ commands:
            /<command> - Display local time based on IP
            /<command> ip - Display local IP used in time calculations
            /<command> reload - Reload RealClock config file
+           /<command> mm - Toggle Maintenance Mode
 
 permissions:
   realclock.clock:
@@ -29,6 +30,12 @@ permissions:
   realclock.reload:
     default: op
     description: Give players with op, reload ability
+  realclock.mm.bypass:
+    default: op
+    description: Give players with op, the ability to bypass mm
+  realclock.mm:
+    default: op
+    description: Give players with op, the ability to toggle mm
   realclock.bypass:
     default: false
     description: This permission is only for testing
