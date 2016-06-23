@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package net.ddns.taytom258.SpigotRealClockPlugin.listeners;
 
 import java.io.File;
@@ -15,12 +18,21 @@ import com.comphenix.protocol.wrappers.WrappedServerPing;
 import net.ddns.taytom258.SpigotRealClockPlugin.Plugin;
 import net.ddns.taytom258.SpigotRealClockPlugin.logger.LogHandler;
 
+/**
+ * Handles changing the status screen for a server under certain conditions
+ * 
+ * @author taytom258
+ *
+ */
 public class PingProtocolEvent {
 	
 	private static ProtocolManager proto;
 	private static Plugin plugin;
 	private static File iconfile;
 	
+	/**
+	 * Constructor and initilization for class
+	 */
   public PingProtocolEvent(){
 	  proto = ProtocolLibrary.getProtocolManager();
 	  plugin = Plugin.getPlugin(Plugin.class);
@@ -28,6 +40,9 @@ public class PingProtocolEvent {
       iconfile = new File(iconpath);
   }
 	
+  /**
+   * Add ping packet listener to change status screen
+   */
   public void addPingResponsePacketListener()
   {
     try
@@ -45,11 +60,6 @@ public class PingProtocolEvent {
             String pingMessage = "Maintenance";
             ping.setVersionProtocol(-1);
             ping.setVersionName(pingMessage);
-            //ping.setPlayersMaximum(0);
-            
-            //String motd = BukkitPlugin.getInstance().getMotd().replaceAll("%newline", "\n");
-            
-            //ping.setMotD(motd);
             
             if (iconfile.exists())
             {

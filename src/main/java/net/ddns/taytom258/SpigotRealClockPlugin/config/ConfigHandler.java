@@ -62,11 +62,10 @@ public class ConfigHandler {
 		checkDefaults();
 		loadValues();
 		file = null;
-		//log.info(Strings.configload);
 	}
 
 	/**
-	 * Check if the default config needs to be read in
+	 * Check if the default config needs to be copied in
 	 */
 	private static void checkDefaults() {
 		if (!file.exists()) {

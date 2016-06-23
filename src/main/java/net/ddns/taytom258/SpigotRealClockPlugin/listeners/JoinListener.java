@@ -12,9 +12,10 @@ import net.ddns.taytom258.SpigotRealClockPlugin.Plugin;
 import net.ddns.taytom258.SpigotRealClockPlugin.reference.Strings;
 
 /**
- * Listener to check if player has commands on join and issues chat message
+ * Listener to check for various conditions on player login event
  * 
  * @author taytom258
+ * @see PlayerLoginEvent
  *
  */
 public class JoinListener implements Listener {

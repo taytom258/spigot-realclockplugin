@@ -29,7 +29,7 @@ import net.ddns.taytom258.SpigotRealClockPlugin.reference.Strings;
 public class Plugin extends JavaPlugin {
 
 	public static String ver;
-	public static boolean essentials = false, permex = false;
+	public static boolean proto = false, permex = false;
 	public static boolean mmenable = false;
 
 	@Override
@@ -50,22 +50,6 @@ public class Plugin extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		
-		//Dependency Checker
-		essentials = false;
-		if (this.getServer().getPluginManager().getPlugin("Essentials") != null){
-			essentials = true;
-			LogHandler.info(Strings.essload);
-		}else{
-			//LogHandler.info(Strings.essloaderror);
-		}
-		permex = false;
-		if (this.getServer().getPluginManager().getPlugin("PermissionEx") != null){
-			permex = true;
-			LogHandler.info(Strings.permload);
-		}else{
-			//LogHandler.info(Strings.permloaderror);
-		}
-		
 		// GeoDB Checker & Initializer
 		File db = new File(Strings.geodb);
 		if (!db.exists()) {
@@ -80,6 +64,23 @@ public class Plugin extends JavaPlugin {
 		// Register & Initialize Commands
 		ClockCommand.init();
 		CommandHandler.registerCommand("realclock", new ClockCommand());
+				
+		//Dependency Checker
+		permex = false;
+		if (this.getServer().getPluginManager().getPlugin("PermissionEx") != null){
+			permex = true;
+			LogHandler.info(Strings.permload);
+		}else{
+			LogHandler.warning(Strings.permloaderror);
+		}
+		proto = false;
+		if (this.getServer().getPluginManager().getPlugin("ProtocolLib") != null){
+			proto = true;
+			LogHandler.info(Strings.protoload);
+		}else{
+			LogHandler.severe(Strings.protoloaderror, true);
+			return;
+		}
 		
 		// Register Listeners
 		ListenerHandler.registerListener(new JoinListener());
@@ -91,6 +92,7 @@ public class Plugin extends JavaPlugin {
 		//TimeZoneDB Checker
 		if (Configuration.api.equalsIgnoreCase("InsertKeyHere") || Configuration.api.equalsIgnoreCase("")){
 			LogHandler.severe(Strings.apierror, true);
+			return;
 		}
 		
 		//Metrics Loader
@@ -112,6 +114,9 @@ public class Plugin extends JavaPlugin {
 		ClockCommand.deinit();
 	}
 	
+	/**
+	 * Kicks all online players without specific permission
+	 */
 	public static void kick() {
 	    for(Player player : Bukkit.getOnlinePlayers()) {
 	    	

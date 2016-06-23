@@ -122,7 +122,6 @@ public class ClockCommand implements CommandExecutor {
 				}
 				
 				if(mm && args[0].equalsIgnoreCase("mm")){
-//					new Thread(mmrunnable, "RealClock MM CMD").start();
 					mm(player);
 					return true;
 				}else if(args[0].equalsIgnoreCase("mm")){
@@ -152,6 +151,7 @@ public class ClockCommand implements CommandExecutor {
 			
 		}else{
 			//If anything other then a player or the console sends the command
+			
 			sender.sendMessage(Strings.commandconsole);
 			return true;
 		}
@@ -159,34 +159,19 @@ public class ClockCommand implements CommandExecutor {
 	
 	private static void mm(CommandSender sender){
 		if (!Plugin.mmenable){
-//			ChatHandler.sendPlayer(ClockCommand.player, Configuration.chatcolor, Strings.mmenabling);
-//	        //Bukkit.getServer().broadcastMessage(Strings.mmenabling);
-//	        try {
-//	            Thread.sleep(1000);
-//	        } catch (InterruptedException e) {
-//	            LogHandler.warning("InterruptedException", e);
-//	        }
-//	        for (int i = 10; i > 0; i--) {
-//	                //Bukkit.getServer().broadcastMessage(Messages.colour(format(parent.getCountdownMessage(), i)));
-//	            try {
-//	                Thread.sleep(1000);
-//	            } catch (InterruptedException e) {
-//	            	LogHandler.warning("InterruptedException", e);
-//	            }
-//	            if (i == 1) {
-	                Plugin.kick();
-	                Plugin.mmenable = true;
-	                JavaPlugin.getPlugin(Plugin.class).getConfig().set(Configuration.path_mm, true);
-	                try {
-						ConfigHandler.save();
-					} catch (IOException e) {
-						LogHandler.warning("IOException", e);
-					}
-	                sender.sendMessage("§" + Configuration.chatcolor + Strings.mmenabled);
-	                //Bukkit.getServer().broadcastMessage(Strings.mmenabled);
-//	            }
-//	        }
+			
+	        Plugin.kick();
+	        Plugin.mmenable = true;
+	        JavaPlugin.getPlugin(Plugin.class).getConfig().set(Configuration.path_mm, true);
+	        try {
+				ConfigHandler.save();
+			} catch (IOException e) {
+				LogHandler.warning("IOException", e);
+			}
+	        sender.sendMessage("§" + Configuration.chatcolor + Strings.mmenabled);
+                
 		}else if (Plugin.mmenable){
+			
 			Plugin.mmenable = false;
 			JavaPlugin.getPlugin(Plugin.class).getConfig().set(Configuration.path_mm, false);
             try {
