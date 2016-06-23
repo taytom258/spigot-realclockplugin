@@ -67,7 +67,7 @@ public class Plugin extends JavaPlugin {
 				
 		//Dependency Checker
 		permex = false;
-		if (this.getServer().getPluginManager().getPlugin("PermissionEx") != null){
+		if (this.getServer().getPluginManager().getPlugin("PermissionsEx") != null){
 			permex = true;
 			LogHandler.info(Strings.permload);
 		}else{

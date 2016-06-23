@@ -32,7 +32,7 @@ permissions:
   realclock.mm.bypass:
     default: op
     description: Give players with op, the ability to bypass mm
-  realclock.mm:
+  realclock.mm.toggle:
     default: op
     description: Give players with op, the ability to toggle mm
   realclock.bypass:
