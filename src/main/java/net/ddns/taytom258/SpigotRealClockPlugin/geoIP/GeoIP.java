@@ -18,8 +18,7 @@ import net.ddns.taytom258.SpigotRealClockPlugin.logger.LogHandler;
 import net.ddns.taytom258.SpigotRealClockPlugin.reference.Strings;
 
 /**
- * Handles reading of GeoLite databases
- * <br>
+ * Handles reading of GeoLite databases <br>
  * <br>
  * This product includes GeoLite2 data created by MaxMind, available from
  * <a href="http://www.maxmind.com">http://www.maxmind.com</a>.

@@ -34,22 +34,21 @@ public class Plugin extends JavaPlugin {
 
 	@Override
 	public void onLoad() {
-		
-		
+
 		// Plugin properties
-		ver = "1.1";
+		ver = "1.2";
 
 		// Log Initialization
 		LogHandler.init();
-		
+
 		// Config Loader
 		ConfigHandler.init();
 		ConfigHandler.checkConfig();
 	}
-	
+
 	@Override
 	public void onEnable() {
-		
+
 		// GeoDB Checker & Initializer
 		File db = new File(Strings.geodb);
 		if (!db.exists()) {
@@ -64,38 +63,41 @@ public class Plugin extends JavaPlugin {
 		// Register & Initialize Commands
 		ClockCommand.init();
 		CommandHandler.registerCommand("realclock", new ClockCommand());
-				
-		//Dependency Checker
+
+		// Dependency Checker
 		permex = false;
-		if (this.getServer().getPluginManager().getPlugin("PermissionsEx") != null){
+		if (this.getServer().getPluginManager()
+				.getPlugin("PermissionsEx") != null) {
 			permex = true;
 			LogHandler.info(Strings.permload);
-		}else{
+		} else {
 			LogHandler.warning(Strings.permloaderror);
 		}
 		proto = false;
-		if (this.getServer().getPluginManager().getPlugin("ProtocolLib") != null){
+		if (this.getServer().getPluginManager()
+				.getPlugin("ProtocolLib") != null) {
 			proto = true;
 			LogHandler.info(Strings.protoload);
-		}else{
+		} else {
 			LogHandler.severe(Strings.protoloaderror, true);
 			return;
 		}
-		
+
 		// Register Listeners
 		ListenerHandler.registerListener(new JoinListener());
-		
+
 		this.saveResource(Strings.icon, true);
 		PingProtocolEvent listener = new PingProtocolEvent();
 		listener.addPingResponsePacketListener();
-		
-		//TimeZoneDB Checker
-		if (Configuration.api.equalsIgnoreCase("InsertKeyHere") || Configuration.api.equalsIgnoreCase("")){
+
+		// TimeZoneDB Checker
+		if (Configuration.api.equalsIgnoreCase("InsertKeyHere")
+				|| Configuration.api.equalsIgnoreCase("")) {
 			LogHandler.severe(Strings.apierror, true);
 			return;
 		}
-		
-		//Metrics Loader
+
+		// Metrics Loader
 		Metrics m;
 		try {
 			m = new Metrics(this);
@@ -103,7 +105,6 @@ public class Plugin extends JavaPlugin {
 		} catch (IOException e) {
 			LogHandler.warning("", e);
 		}
-		
 
 	}
 
@@ -113,18 +114,18 @@ public class Plugin extends JavaPlugin {
 		GeoIP.deinit();
 		ClockCommand.deinit();
 	}
-	
+
 	/**
 	 * Kicks all online players without specific permission
 	 */
 	public static void kick() {
-	    for(Player player : Bukkit.getOnlinePlayers()) {
-	    	
-            if (player.isOp() || player.hasPermission("realclock.mm.bypass")) {
-            	return;
-            }else{
-            	player.kickPlayer("§cServer undergoing maintenance");
-            } 
-	    }
-    }
+		for (Player player : Bukkit.getOnlinePlayers()) {
+
+			if (player.isOp() || player.hasPermission("realclock.mm.bypass")) {
+				return;
+			} else {
+				player.kickPlayer("§cServer undergoing maintenance");
+			}
+		}
+	}
 }

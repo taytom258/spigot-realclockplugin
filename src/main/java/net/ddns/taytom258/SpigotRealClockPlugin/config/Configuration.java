@@ -11,7 +11,7 @@ package net.ddns.taytom258.SpigotRealClockPlugin.config;
  */
 
 public class Configuration {
-	
+
 	// Config Paths
 	public static String path_ver = "Config Version (DO NOT TOUCH)";
 	public static String path_develop = "Development (DO NOT TOUCH)";
@@ -21,7 +21,8 @@ public class Configuration {
 	public static String path_api = "TimeZoneAPIKey";
 	public static String path_log = "LogLevel (INFO,WARNING,SEVERE)";
 	public static String path_mm = "MM (DO NOT TOUCH)";
-	
+	public static String path_cool = "Command Cooldown (in seconds)";
+
 	// Config Variables
 	public static double ver;
 	public static boolean develop;
@@ -30,4 +31,5 @@ public class Configuration {
 	public static String chatcolor;
 	public static String api;
 	public static String log;
+	public static int cool;
 }

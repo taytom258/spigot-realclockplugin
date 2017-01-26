@@ -29,29 +29,31 @@ public class ConfigHandler {
 	/**
 	 * Reload Configuration
 	 */
-	public static void reload(){
+	public static void reload() {
 		JavaPlugin.getPlugin(Plugin.class).reloadConfig();
 		config = JavaPlugin.getPlugin(Plugin.class).getConfig();
 		checkConfig();
 	}
-	
-	public static void save() throws IOException{
-		JavaPlugin.getPlugin(Plugin.class).getConfig().save(new File(folder, "config.yml"));
+
+	public static void save() throws IOException {
+		JavaPlugin.getPlugin(Plugin.class).getConfig()
+				.save(new File(folder, "config.yml"));
 	}
-	
+
 	/**
 	 * Initilize config variables
 	 */
 	public static void init() {
-		
+
+		//TODO Use Bukkit.getWorldContainer() for world folder location
 		folder = JavaPlugin.getPlugin(Plugin.class).getDataFolder();
 		log = JavaPlugin.getPlugin(Plugin.class).getLogger();
 		plugin = JavaPlugin.getPlugin(Plugin.class);
 	}
 
 	/**
-	 * Checks if config folders exist and if the config file exists.
-	 * Creates them both if they do not exist.
+	 * Checks if config folders exist and if the config file exists. Creates
+	 * them both if they do not exist.
 	 */
 	public static void checkConfig() {
 
@@ -96,11 +98,14 @@ public class ConfigHandler {
 	 */
 	private static void loadValues() {
 		Configuration.latlng = config.getBoolean(Configuration.path_latlng);
-		Configuration.timeformat = config.getString(Configuration.path_timeformat);
-		Configuration.chatcolor = config.getString(Configuration.path_chatcolor);
+		Configuration.timeformat = config
+				.getString(Configuration.path_timeformat);
+		Configuration.chatcolor = config
+				.getString(Configuration.path_chatcolor);
 		Configuration.develop = config.getBoolean(Configuration.path_develop);
 		Configuration.api = config.getString(Configuration.path_api);
 		Configuration.log = config.getString(Configuration.path_log);
+		Configuration.cool = config.getInt(Configuration.path_cool);
 		Plugin.mmenable = config.getBoolean(Configuration.path_mm);
 	}
 

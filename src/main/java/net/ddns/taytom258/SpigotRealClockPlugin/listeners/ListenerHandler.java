@@ -20,14 +20,15 @@ public class ListenerHandler {
 	/**
 	 * Register various listeners
 	 * 
-	 * @param listen class that implements Listener
+	 * @param listen
+	 *            class that implements Listener
 	 */
-	public static void registerListener(Listener listen){
-		
+	public static void registerListener(Listener listen) {
+
 		Server server = JavaPlugin.getPlugin(Plugin.class).getServer();
 		JavaPlugin plugin = JavaPlugin.getPlugin(Plugin.class);
-		
+
 		server.getPluginManager().registerEvents(listen, plugin);
-		
+
 	}
 }
