@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<!-- Configuration of the Ant build system to generate a Jar file -->
+<project name="SpigotRealClockPlugin" default="CopyJar">
+	<target name="CopyJar" description="Copy Jar file">
+		<delete>
+			<fileset dir="./server/plugins" includes="**/*-jar-with-denpendencies*" />
+		</delete>
+		<copy todir="./server/plugins" overwrite="true">
+			<fileset dir="./target">
+				<include name="**/*-jar-with-dependencies*" />
+			</fileset>
+		</copy>
+	</target>
+</project>

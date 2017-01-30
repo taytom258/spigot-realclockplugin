@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.HashMap;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -73,7 +74,7 @@ public class ClockCommand implements CommandExecutor {
 
 			// Check for command permissions
 			boolean superperm = false, clock = false, clockIP = false,
-					clockRe = false, mm = false;
+					clockRe = false, mm = false, backup = false;
 			bypass = false;
 			if (player.hasPermission("realclock.clock.*")) {
 				superperm = true;
@@ -93,14 +94,17 @@ public class ClockCommand implements CommandExecutor {
 			if (player.hasPermission("realclock.mm.toggle")) {
 				mm = true;
 			}
+			if (player.hasPermission("realclock.backup")){
+				backup = true;
+			}
 
 			// Check for base clock command
 			if ((clock || superperm)
 					&& cmd.getName().equalsIgnoreCase("realclock")
 					&& args.length == 0) {
-				new Thread(clockRunnable, "RealClock Clock CMD").start();
-				//TODO Use this as a template for the autosave and backup features
-				//Plugin.getPlugin(Plugin.class).getServer().dispatchCommand(Plugin.getPlugin(Plugin.class).getServer().getConsoleSender(), "tm abc Testing...");
+				Bukkit.getServer().getScheduler().runTask(
+						JavaPlugin.getPlugin(Plugin.class), clockRunnable);
+				// new Thread(clockRunnable, "RealClock Clock CMD").start();
 				return true;
 			}
 
@@ -145,6 +149,14 @@ public class ClockCommand implements CommandExecutor {
 					ChatHandler.sendPlayer(player, "6", Strings.commanddeny);
 					return true;
 				}
+				
+				if (backup && args[0].equalsIgnoreCase("backup")) {
+					ChatHandler.sendPlayer(player, "4", "This is a placeholder command");
+					return true;
+				} else if (args[0].equalsIgnoreCase("backup")) {
+					ChatHandler.sendPlayer(player, "6", Strings.commanddeny);
+					return true;
+				}
 			}
 
 			return false;
@@ -161,6 +173,11 @@ public class ClockCommand implements CommandExecutor {
 
 			if (args[0].equalsIgnoreCase("mm")) {
 				mm(console);
+				return true;
+			}
+
+			if (args[0].equalsIgnoreCase("backup")) {
+				ChatHandler.sendConsole(Bukkit.getConsoleSender(), "4", "This is a placeholder command");
 				return true;
 			}
 
@@ -207,6 +224,7 @@ public class ClockCommand implements CommandExecutor {
 
 	/**
 	 * Method for determining a host's IP when it is on a local network
+	 * 
 	 * @return String - IP Address of Host
 	 */
 	public static String getIpAddress() {

@@ -81,7 +81,7 @@ public class ClockRunnable {
 	 * Clock command cooldown
 	 * 
 	 */
-	//TODO Use this as the timer for when to fire the save and backup commands
+	// TODO Use this as the timer for when to fire the save and backup commands
 	public static void clock() {
 		boolean cooldown = false;
 		int cooldownTime = 60;

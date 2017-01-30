@@ -1,6 +1,8 @@
 *.class
 /target/
 **/*.mmdb
+/server/
+**/*.externalToolBuilders
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/

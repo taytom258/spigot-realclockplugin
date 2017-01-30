@@ -46,6 +46,16 @@ public class LogHandler {
 	}
 
 	/**
+	 * Send info message to console regardless of config setting.
+	 * 
+	 * @param msg
+	 *            string, to send
+	 */
+	public static void bypass(String msg) {
+		log.info(msg);
+	}
+
+	/**
 	 * Send warning message, with exception information, to the console
 	 * 
 	 * @param error

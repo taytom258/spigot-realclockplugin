@@ -5,12 +5,12 @@ package net.ddns.taytom258.SpigotRealClockPlugin.config;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Logger;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import net.ddns.taytom258.SpigotRealClockPlugin.Plugin;
+import net.ddns.taytom258.SpigotRealClockPlugin.logger.LogHandler;
 import net.ddns.taytom258.SpigotRealClockPlugin.reference.Strings;
 
 /**
@@ -23,7 +23,6 @@ public class ConfigHandler {
 
 	private static File folder, file;
 	private static FileConfiguration config;
-	private static Logger log;
 	private static JavaPlugin plugin;
 
 	/**
@@ -45,9 +44,7 @@ public class ConfigHandler {
 	 */
 	public static void init() {
 
-		//TODO Use Bukkit.getWorldContainer() for world folder location
 		folder = JavaPlugin.getPlugin(Plugin.class).getDataFolder();
-		log = JavaPlugin.getPlugin(Plugin.class).getLogger();
 		plugin = JavaPlugin.getPlugin(Plugin.class);
 	}
 
@@ -71,14 +68,14 @@ public class ConfigHandler {
 	 */
 	private static void checkDefaults() {
 		if (!file.exists()) {
-			log.info(Strings.confignf);
+			LogHandler.bypass(Strings.confignf);
 			makeDefaults();
 		} else {
 			config = JavaPlugin.getPlugin(Plugin.class).getConfig();
-			log.info(Strings.configf);
+			LogHandler.bypass(Strings.configf);
 			Configuration.ver = config.getDouble(Configuration.path_ver);
 			if (Configuration.ver != Double.parseDouble(Plugin.ver)) {
-				log.info(Strings.configold);
+				LogHandler.bypass(Strings.configold);
 				file.delete();
 				makeDefaults();
 			}

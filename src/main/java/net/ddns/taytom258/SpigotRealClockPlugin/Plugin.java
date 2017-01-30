@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mcstats.Metrics;
 
+import net.ddns.taytom258.SpigotRealClockPlugin.backup.Backup;
 import net.ddns.taytom258.SpigotRealClockPlugin.commands.ClockCommand;
 import net.ddns.taytom258.SpigotRealClockPlugin.commands.CommandHandler;
 import net.ddns.taytom258.SpigotRealClockPlugin.config.ConfigHandler;
@@ -29,7 +30,7 @@ import net.ddns.taytom258.SpigotRealClockPlugin.reference.Strings;
 public class Plugin extends JavaPlugin {
 
 	public static String ver;
-	public static boolean proto = false, permex = false;
+	public static boolean proto = false, permex = false, tm = false;
 	public static boolean mmenable = false;
 
 	@Override
@@ -82,6 +83,11 @@ public class Plugin extends JavaPlugin {
 			LogHandler.severe(Strings.protoloaderror, true);
 			return;
 		}
+		tm = false;
+		if (this.getServer().getPluginManager()
+				.getPlugin("TitleManager") != null) {
+			tm = true;
+		}
 
 		// Register Listeners
 		ListenerHandler.registerListener(new JoinListener());
@@ -106,6 +112,8 @@ public class Plugin extends JavaPlugin {
 			LogHandler.warning("", e);
 		}
 
+		// Backup Initializer
+		Backup.init();
 	}
 
 	@Override
@@ -113,6 +121,7 @@ public class Plugin extends JavaPlugin {
 
 		GeoIP.deinit();
 		ClockCommand.deinit();
+		Bukkit.getServer().getScheduler().cancelTasks(this);
 	}
 
 	/**
@@ -127,5 +136,9 @@ public class Plugin extends JavaPlugin {
 				player.kickPlayer("§cServer undergoing maintenance");
 			}
 		}
+	}
+
+	public static void runBackup() {
+
 	}
 }
