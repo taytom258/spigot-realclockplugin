@@ -51,7 +51,7 @@ public class PingProtocolEvent {
 			proto.addPacketListener(new PacketAdapter(PacketAdapter
 					.params(plugin,
 							new PacketType[]{
-									PacketType.Status.Server.OUT_SERVER_INFO})
+									PacketType.Status.Server.SERVER_INFO})
 					.serverSide().gamePhase(GamePhase.BOTH)
 					.listenerPriority(ListenerPriority.HIGHEST).optionAsync()) {
 				@Override

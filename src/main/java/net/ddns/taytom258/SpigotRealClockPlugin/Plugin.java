@@ -1,12 +1,10 @@
 package net.ddns.taytom258.SpigotRealClockPlugin;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.mcstats.Metrics;
 
 import net.ddns.taytom258.SpigotRealClockPlugin.backup.Backup;
 import net.ddns.taytom258.SpigotRealClockPlugin.commands.ClockCommand;
@@ -103,6 +101,7 @@ public class Plugin extends JavaPlugin {
 			return;
 		}
 
+/*
 		// Metrics Loader
 		Metrics m;
 		try {
@@ -111,11 +110,10 @@ public class Plugin extends JavaPlugin {
 		} catch (IOException e) {
 			LogHandler.warning("", e);
 		}
-
+*/
 		// Backup Initializer
 		Backup.init();
 	}
-
 	@Override
 	public void onDisable() {
 
