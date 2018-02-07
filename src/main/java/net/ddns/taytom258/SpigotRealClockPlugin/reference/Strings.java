@@ -26,7 +26,7 @@ public class Strings {
 
 	public static String confignf = "Config.yml not found, creating defaults!";
 	public static String configf = "Config.yml found, loading!";
-	public static String configold = "Config.yml is old version, creating new one!";
+	public static String configold = "Config.yml is an old version, creating new one!";
 	public static String configload = "Config Loading complete...";
 	public static String confighead = "Configuration for RealClock Plugin";
 
