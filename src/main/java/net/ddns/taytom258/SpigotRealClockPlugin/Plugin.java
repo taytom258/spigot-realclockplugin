@@ -65,16 +65,14 @@ public class Plugin extends JavaPlugin {
 
 		// Dependency Checker
 		permex = false;
-		if (this.getServer().getPluginManager()
-				.getPlugin("PermissionsEx") != null) {
+		if (this.getServer().getPluginManager().getPlugin("PermissionsEx") != null) {
 			permex = true;
 			LogHandler.info(Strings.permload);
 		} else {
 			LogHandler.warning(Strings.permloaderror);
 		}
 		proto = false;
-		if (this.getServer().getPluginManager()
-				.getPlugin("ProtocolLib") != null) {
+		if (this.getServer().getPluginManager().getPlugin("ProtocolLib") != null) {
 			proto = true;
 			LogHandler.info(Strings.protoload);
 		} else {
@@ -82,8 +80,7 @@ public class Plugin extends JavaPlugin {
 			return;
 		}
 		tm = false;
-		if (this.getServer().getPluginManager()
-				.getPlugin("TitleManager") != null) {
+		if (this.getServer().getPluginManager().getPlugin("TitleManager") != null) {
 			tm = true;
 		}
 
@@ -95,25 +92,19 @@ public class Plugin extends JavaPlugin {
 		listener.addPingResponsePacketListener();
 
 		// TimeZoneDB Checker
-		if (Configuration.api.equalsIgnoreCase("InsertKeyHere")
-				|| Configuration.api.equalsIgnoreCase("")) {
+		if (Configuration.api.equalsIgnoreCase("InsertKeyHere") || Configuration.api.equalsIgnoreCase("")) {
 			LogHandler.severe(Strings.apierror, true);
 			return;
 		}
 
-/*
-		// Metrics Loader
-		Metrics m;
-		try {
-			m = new Metrics(this);
-			m.start();
-		} catch (IOException e) {
-			LogHandler.warning("", e);
-		}
-*/
+		/*
+		 * // Metrics Loader Metrics m; try { m = new Metrics(this); m.start(); } catch
+		 * (IOException e) { LogHandler.warning("", e); }
+		 */
 		// Backup Initializer
 		Backup.init();
 	}
+
 	@Override
 	public void onDisable() {
 

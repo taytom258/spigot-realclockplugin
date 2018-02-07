@@ -39,8 +39,7 @@ public class GeoIP {
 		database = new File(Strings.geodb);
 
 		try {
-			reader = new DatabaseReader.Builder(database)
-					.withCache(new CHMCache()).build();
+			reader = new DatabaseReader.Builder(database).withCache(new CHMCache()).build();
 		} catch (IOException e) {
 			LogHandler.warning("", e);
 		}
@@ -70,8 +69,7 @@ public class GeoIP {
 	 * @throws IOException
 	 * @throws GeoIp2Exception
 	 */
-	public static String getLocation(String IP)
-			throws IOException, GeoIp2Exception {
+	public static String getLocation(String IP) throws IOException, GeoIp2Exception {
 
 		InetAddress ipAddress = null;
 		ipAddress = InetAddress.getByName(IP);
@@ -81,8 +79,7 @@ public class GeoIP {
 
 		Location location = response.getLocation();
 
-		String LatLong = String.format("%s;%s", location.getLatitude(),
-				location.getLongitude());
+		String LatLong = String.format("%s;%s", location.getLatitude(), location.getLongitude());
 
 		return LatLong;
 	}

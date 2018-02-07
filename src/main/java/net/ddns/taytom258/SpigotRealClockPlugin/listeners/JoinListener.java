@@ -22,8 +22,7 @@ public class JoinListener implements Listener {
 
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onPlayerJoin(PlayerLoginEvent event) {
-		if ((Plugin.mmenable && (event.getPlayer().isOp())
-				|| event.getPlayer().hasPermission("realclock.mm.bypass"))) {
+		if ((Plugin.mmenable && (event.getPlayer().isOp()) || event.getPlayer().hasPermission("realclock.mm.bypass"))) {
 			return;
 		} else if (!Plugin.mmenable) {
 			if (event.getPlayer().hasPermission("realclock.bypass")) {

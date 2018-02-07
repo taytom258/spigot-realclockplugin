@@ -70,10 +70,8 @@ public class LogHandler {
 	 */
 	public static void warning(String error, Exception e) {
 
-		if (Configuration.log.equalsIgnoreCase("info")
-				|| Configuration.log.equalsIgnoreCase("warning")) {
-			String msg = "Exception ".concat(e.getCause().toString())
-					.concat(" by ").concat(e.getClass().toString());
+		if (Configuration.log.equalsIgnoreCase("info") || Configuration.log.equalsIgnoreCase("warning")) {
+			String msg = "Exception ".concat(e.getCause().toString()).concat(" by ").concat(e.getClass().toString());
 
 			log.warning(msg);
 			if (error != "") {
@@ -91,15 +89,14 @@ public class LogHandler {
 	 */
 	public static void warning(String error) {
 
-		if (Configuration.log.equalsIgnoreCase("info")
-				|| Configuration.log.equalsIgnoreCase("warning")) {
+		if (Configuration.log.equalsIgnoreCase("info") || Configuration.log.equalsIgnoreCase("warning")) {
 			log.warning(error);
 		}
 	}
 
 	/**
-	 * Send severe message, with exception information, to the console Also
-	 * gives option to disable plugin.
+	 * Send severe message, with exception information, to the console Also gives
+	 * option to disable plugin.
 	 * 
 	 * @param error
 	 *            string, message to send
@@ -116,18 +113,15 @@ public class LogHandler {
 	 */
 	public static void severe(String error, boolean disable, Exception e) {
 
-		if (Configuration.log.equalsIgnoreCase("info")
-				|| Configuration.log.equalsIgnoreCase("warning")
+		if (Configuration.log.equalsIgnoreCase("info") || Configuration.log.equalsIgnoreCase("warning")
 				|| Configuration.log.equalsIgnoreCase("severe")) {
-			String msg = "Exception ".concat(e.getCause().toString())
-					.concat(" by ").concat(e.getClass().toString());
+			String msg = "Exception ".concat(e.getCause().toString()).concat(" by ").concat(e.getClass().toString());
 
 			log.severe(msg);
 			e.printStackTrace();
 
 			if (disable) {
-				JavaPlugin.getPlugin(Plugin.class).getServer()
-						.getPluginManager()
+				JavaPlugin.getPlugin(Plugin.class).getServer().getPluginManager()
 						.disablePlugin(JavaPlugin.getPlugin(Plugin.class));
 			}
 		}
@@ -145,14 +139,12 @@ public class LogHandler {
 	 */
 	public static void severe(String error, boolean disable) {
 
-		if (Configuration.log.equalsIgnoreCase("info")
-				|| Configuration.log.equalsIgnoreCase("warning")
+		if (Configuration.log.equalsIgnoreCase("info") || Configuration.log.equalsIgnoreCase("warning")
 				|| Configuration.log.equalsIgnoreCase("severe")) {
 			log.severe(error);
 
 			if (disable) {
-				JavaPlugin.getPlugin(Plugin.class).getServer()
-						.getPluginManager()
+				JavaPlugin.getPlugin(Plugin.class).getServer().getPluginManager()
 						.disablePlugin(JavaPlugin.getPlugin(Plugin.class));
 			}
 		}

@@ -69,15 +69,12 @@ public class TimeZoneDB {
 	 * @return complete URI
 	 * @throws URISyntaxException
 	 */
-	private static URI buildURI(String lat, String lng)
-			throws URISyntaxException {
+	private static URI buildURI(String lat, String lng) throws URISyntaxException {
 
 		String api = Configuration.api;
 
-		URI uri = new URIBuilder().setScheme("http")
-				.setHost("api.timezonedb.com").setPath("/")
-				.setParameter("key", api).setParameter("lat", lat)
-				.setParameter("lng", lng).build();
+		URI uri = new URIBuilder().setScheme("http").setHost("api.timezonedb.com").setPath("/").setParameter("key", api)
+				.setParameter("lat", lat).setParameter("lng", lng).build();
 		return uri;
 	}
 
@@ -90,8 +87,7 @@ public class TimeZoneDB {
 	 * @throws Exception
 	 *             multiple exceptions
 	 */
-	private static String processReponse(CloseableHttpResponse response)
-			throws Exception {
+	private static String processReponse(CloseableHttpResponse response) throws Exception {
 
 		InputStream in = response.getEntity().getContent();
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -117,8 +113,7 @@ public class TimeZoneDB {
 	 */
 	private static String convertTime(String input) {
 
-		String timestamp = StringUtils.substringBetween(input, "<timestamp>",
-				"</timestamp>");
+		String timestamp = StringUtils.substringBetween(input, "<timestamp>", "</timestamp>");
 		// String timezone =
 		// StringUtils.substringBetween(input,"<abbreviation>",
 		// "</abbreviation>");

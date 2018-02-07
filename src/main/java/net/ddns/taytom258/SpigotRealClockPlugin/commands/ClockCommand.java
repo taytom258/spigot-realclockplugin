@@ -45,6 +45,7 @@ public class ClockCommand implements CommandExecutor {
 
 		cooldowns = new HashMap<String, Long>();
 		clockRunnable = new Runnable() {
+			@Override
 			public void run() {
 				ClockRunnable.clock();
 			}
@@ -65,16 +66,15 @@ public class ClockCommand implements CommandExecutor {
 		cooldowns = null;
 	}
 
-	public boolean onCommand(CommandSender sender, Command cmd, String label,
-			String[] args) {
+	@Override
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
 		// Cast sender to player variable if sender is a player
 		if (sender instanceof Player) {
 			player = (Player) sender;
 
 			// Check for command permissions
-			boolean superperm = false, clock = false, clockIP = false,
-					clockRe = false, mm = false, backup = false;
+			boolean superperm = false, clock = false, clockIP = false, clockRe = false, mm = false, backup = false;
 			bypass = false;
 			if (player.hasPermission("realclock.clock.*")) {
 				superperm = true;
@@ -94,37 +94,28 @@ public class ClockCommand implements CommandExecutor {
 			if (player.hasPermission("realclock.mm.toggle")) {
 				mm = true;
 			}
-			if (player.hasPermission("realclock.backup")){
+			if (player.hasPermission("realclock.backup")) {
 				backup = true;
 			}
 
 			// Check for base clock command
-			if ((clock || superperm)
-					&& cmd.getName().equalsIgnoreCase("realclock")
-					&& args.length == 0) {
-				Bukkit.getServer().getScheduler().runTask(
-						JavaPlugin.getPlugin(Plugin.class), clockRunnable);
+			if ((clock || superperm) && cmd.getName().equalsIgnoreCase("realclock") && args.length == 0) {
+				Bukkit.getServer().getScheduler().runTask(JavaPlugin.getPlugin(Plugin.class), clockRunnable);
 				// new Thread(clockRunnable, "RealClock Clock CMD").start();
 				return true;
 			}
 
 			// Check for sub commands
-			if (cmd.getName().equalsIgnoreCase("realclock")
-					&& args.length > 0) {
+			if (cmd.getName().equalsIgnoreCase("realclock") && args.length > 0) {
 
 				if ((clockIP || superperm) && args[0].equalsIgnoreCase("ip")) {
 					if (player.getAddress().getHostString().equals("127.0.0.1")
-							|| ClockCommand.player.getAddress().getHostString()
-									.startsWith("172.16")
-							|| ClockCommand.player.getAddress().getHostString()
-									.startsWith("10")
-							|| ClockCommand.player.getAddress().getHostString()
-									.startsWith("192.168")) {
-						ChatHandler.sendPlayer(player, Configuration.chatcolor,
-								getIpAddress());
+							|| ClockCommand.player.getAddress().getHostString().startsWith("172.16")
+							|| ClockCommand.player.getAddress().getHostString().startsWith("10")
+							|| ClockCommand.player.getAddress().getHostString().startsWith("192.168")) {
+						ChatHandler.sendPlayer(player, Configuration.chatcolor, getIpAddress());
 					} else {
-						ChatHandler.sendPlayer(player, Configuration.chatcolor,
-								player.getAddress().getHostString());
+						ChatHandler.sendPlayer(player, Configuration.chatcolor, player.getAddress().getHostString());
 					}
 					return true;
 				} else if (args[0].equalsIgnoreCase("ip")) {
@@ -134,8 +125,7 @@ public class ClockCommand implements CommandExecutor {
 
 				if (clockRe && args[0].equalsIgnoreCase("reload")) {
 					ConfigHandler.reload();
-					ChatHandler.sendPlayer(player, Configuration.chatcolor,
-							Strings.reloadComplete);
+					ChatHandler.sendPlayer(player, Configuration.chatcolor, Strings.reloadComplete);
 					return true;
 				} else if (args[0].equalsIgnoreCase("reload")) {
 					ChatHandler.sendPlayer(player, "6", Strings.commanddeny);
@@ -149,7 +139,7 @@ public class ClockCommand implements CommandExecutor {
 					ChatHandler.sendPlayer(player, "6", Strings.commanddeny);
 					return true;
 				}
-				
+
 				if (backup && args[0].equalsIgnoreCase("backup")) {
 					ChatHandler.sendPlayer(player, "4", "This is a placeholder command");
 					return true;
@@ -166,8 +156,7 @@ public class ClockCommand implements CommandExecutor {
 			console = (ConsoleCommandSender) sender;
 			if (args[0].equalsIgnoreCase("reload")) {
 				ConfigHandler.reload();
-				ChatHandler.sendConsole(console, Configuration.chatcolor,
-						Strings.reloadComplete);
+				ChatHandler.sendConsole(console, Configuration.chatcolor, Strings.reloadComplete);
 				return true;
 			}
 
@@ -197,28 +186,24 @@ public class ClockCommand implements CommandExecutor {
 
 			Plugin.kick();
 			Plugin.mmenable = true;
-			JavaPlugin.getPlugin(Plugin.class).getConfig()
-					.set(Configuration.path_mm, true);
+			JavaPlugin.getPlugin(Plugin.class).getConfig().set(Configuration.path_mm, true);
 			try {
 				ConfigHandler.save();
 			} catch (IOException e) {
 				LogHandler.warning("IOException", e);
 			}
-			sender.sendMessage(
-					"§" + Configuration.chatcolor + Strings.mmenabled);
+			sender.sendMessage("§" + Configuration.chatcolor + Strings.mmenabled);
 
 		} else if (Plugin.mmenable) {
 
 			Plugin.mmenable = false;
-			JavaPlugin.getPlugin(Plugin.class).getConfig()
-					.set(Configuration.path_mm, false);
+			JavaPlugin.getPlugin(Plugin.class).getConfig().set(Configuration.path_mm, false);
 			try {
 				ConfigHandler.save();
 			} catch (IOException e) {
 				LogHandler.warning("IOException", e);
 			}
-			sender.sendMessage(
-					"§" + Configuration.chatcolor + Strings.mmdisabled);
+			sender.sendMessage("§" + Configuration.chatcolor + Strings.mmdisabled);
 		}
 	}
 
@@ -232,15 +217,13 @@ public class ClockCommand implements CommandExecutor {
 		try {
 			myIP = new URL("http://myip.dnsomatic.com/");
 
-			BufferedReader in = new BufferedReader(
-					new InputStreamReader(myIP.openStream()));
+			BufferedReader in = new BufferedReader(new InputStreamReader(myIP.openStream()));
 			return in.readLine();
 		} catch (Exception e1) {
 			try {
 				myIP = new URL("http://icanhazip.com/");
 
-				BufferedReader in = new BufferedReader(
-						new InputStreamReader(myIP.openStream()));
+				BufferedReader in = new BufferedReader(new InputStreamReader(myIP.openStream()));
 				return in.readLine();
 			} catch (Exception e2) {
 				e2.printStackTrace();

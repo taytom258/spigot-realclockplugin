@@ -38,8 +38,7 @@ public class PingProtocolEvent {
 	public PingProtocolEvent() {
 		proto = ProtocolLibrary.getProtocolManager();
 		plugin = JavaPlugin.getPlugin(Plugin.class);
-		String iconpath = plugin.getDataFolder().toString()
-				+ "/server-icon.png";
+		String iconpath = plugin.getDataFolder().toString() + "/server-icon.png";
 		iconfile = new File(iconpath);
 	}
 
@@ -48,19 +47,15 @@ public class PingProtocolEvent {
 	 */
 	public void addPingResponsePacketListener() {
 		try {
-			proto.addPacketListener(new PacketAdapter(PacketAdapter
-					.params(plugin,
-							new PacketType[]{
-									PacketType.Status.Server.SERVER_INFO})
-					.serverSide().gamePhase(GamePhase.BOTH)
-					.listenerPriority(ListenerPriority.HIGHEST).optionAsync()) {
+			proto.addPacketListener(new PacketAdapter(
+					PacketAdapter.params(plugin, new PacketType[] { PacketType.Status.Server.SERVER_INFO }).serverSide()
+							.gamePhase(GamePhase.BOTH).listenerPriority(ListenerPriority.HIGHEST).optionAsync()) {
 				@Override
 				public void onPacketSending(PacketEvent event) {
 					try {
 						if (Plugin.mmenable) {
 
-							WrappedServerPing ping = event.getPacket()
-									.getServerPings().getValues().get(0);
+							WrappedServerPing ping = event.getPacket().getServerPings().getValues().get(0);
 
 							String pingMessage = "Maintenance";
 							ping.setVersionProtocol(-1);
@@ -74,8 +69,7 @@ public class PingProtocolEvent {
 
 							}
 
-							event.getPacket().getServerPings().getValues()
-									.set(0, ping);
+							event.getPacket().getServerPings().getValues().set(0, ping);
 
 						}
 

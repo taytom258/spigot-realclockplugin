@@ -40,8 +40,7 @@ public class ChatHandler {
 	 *            to send
 	 * @see ConsoleCommandSender
 	 */
-	public static void sendConsole(ConsoleCommandSender console, String color,
-			String message) {
+	public static void sendConsole(ConsoleCommandSender console, String color, String message) {
 		console.sendMessage("§" + color + message);
 	}
 }

@@ -36,18 +36,13 @@ public class ClockRunnable {
 
 		// Run GeoIP Lookup logic
 		try {
-			if (ClockCommand.player.getAddress().getHostString()
-					.equals("127.0.0.1")
-					|| ClockCommand.player.getAddress().getHostString()
-							.startsWith("172.16")
-					|| ClockCommand.player.getAddress().getHostString()
-							.startsWith("10")
-					|| ClockCommand.player.getAddress().getHostString()
-							.startsWith("192.168")) {
+			if (ClockCommand.player.getAddress().getHostString().equals("127.0.0.1")
+					|| ClockCommand.player.getAddress().getHostString().startsWith("172.16")
+					|| ClockCommand.player.getAddress().getHostString().startsWith("10")
+					|| ClockCommand.player.getAddress().getHostString().startsWith("192.168")) {
 				latlng = GeoIP.getLocation(ClockCommand.getIpAddress());
 			} else {
-				latlng = GeoIP.getLocation(
-						ClockCommand.player.getAddress().getHostString());
+				latlng = GeoIP.getLocation(ClockCommand.player.getAddress().getHostString());
 			}
 		} catch (IOException e) {
 			LogHandler.warning("", e);
@@ -73,8 +68,7 @@ public class ClockRunnable {
 		} catch (Exception e) {
 			LogHandler.warning("TimeZoneDB", e);
 		}
-		ChatHandler.sendPlayer(ClockCommand.player, Configuration.chatcolor,
-				time);
+		ChatHandler.sendPlayer(ClockCommand.player, Configuration.chatcolor, time);
 	}
 
 	/**
@@ -93,32 +87,25 @@ public class ClockRunnable {
 				cooldownTime = 2;
 			}
 			// Time in seconds
-			if (ClockCommand.cooldowns
-					.containsKey(ClockCommand.player.getName())) {
-				long secondsLeft = ((ClockCommand.cooldowns
-						.get(ClockCommand.player.getName()) / 1000)
-						+ cooldownTime) - (System.currentTimeMillis() / 1000);
+			if (ClockCommand.cooldowns.containsKey(ClockCommand.player.getName())) {
+				long secondsLeft = ((ClockCommand.cooldowns.get(ClockCommand.player.getName()) / 1000) + cooldownTime)
+						- (System.currentTimeMillis() / 1000);
 				if (secondsLeft > 0) {
 					// Still cooling down
-					ChatHandler.sendPlayer(ClockCommand.player,
-							Configuration.chatcolor,
-							"You can not use that command for another "
-									+ secondsLeft + " seconds!");
+					ChatHandler.sendPlayer(ClockCommand.player, Configuration.chatcolor,
+							"You can not use that command for another " + secondsLeft + " seconds!");
 					cooldown = true;
 				} else {
 					// Cooldown has expired, save new cooldown
-					ClockCommand.cooldowns.put(ClockCommand.player.getName(),
-							System.currentTimeMillis());
+					ClockCommand.cooldowns.put(ClockCommand.player.getName(), System.currentTimeMillis());
 				}
 			} else {
 				// Cooldown not found, save new cooldown
-				ClockCommand.cooldowns.put(ClockCommand.player.getName(),
-						System.currentTimeMillis());
+				ClockCommand.cooldowns.put(ClockCommand.player.getName(), System.currentTimeMillis());
 			}
 		}
 		if (!cooldown) {
-			ChatHandler.sendPlayer(ClockCommand.player, Configuration.chatcolor,
-					"Loading...");
+			ChatHandler.sendPlayer(ClockCommand.player, Configuration.chatcolor, "Loading...");
 			lookup();
 		}
 	}

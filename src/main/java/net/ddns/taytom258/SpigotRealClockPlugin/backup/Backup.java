@@ -33,6 +33,7 @@ public class Backup {
 
 		backupRunnable = new Runnable() {
 
+			@Override
 			public void run() {
 				copyWorldFiles();
 
@@ -40,43 +41,41 @@ public class Backup {
 		};
 		saveRunnable = new Runnable() {
 
+			@Override
 			public void run() {
 				ChatHandler.sendConsole(Bukkit.getConsoleSender(), "9", "Saving world...");
 				for (World worlds : Bukkit.getWorlds()) {
 					worlds.save();
 				}
 				if (Plugin.tm) {
-					Bukkit.getServer().dispatchCommand(
-							Bukkit.getServer().getConsoleSender(),
+					Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(),
 							"tm abc §9Saving world...");
 				}
 			}
 		};
 		restartRunnable = new Runnable() {
 
+			@Override
 			public void run() {
 				ticker++;
 				switch (ticker) {
-					case 285: //say 15 min
-						break;
-					case 286: //say 10 min
-						break;
-					case 287: //say 5 min
-						break;
-					case 288:
-						Bukkit.shutdown();
+				case 285: // say 15 min
+					break;
+				case 286: // say 10 min
+					break;
+				case 287: // say 5 min
+					break;
+				case 288:
+					Bukkit.shutdown();
 				}
 			}
 		};
 
-		Bukkit.getServer().getScheduler().runTaskTimer(
-				JavaPlugin.getPlugin(Plugin.class), backupRunnable, 1200 * 30,
+		Bukkit.getServer().getScheduler().runTaskTimer(JavaPlugin.getPlugin(Plugin.class), backupRunnable, 1200 * 30,
 				1200 * 60);
-		Bukkit.getServer().getScheduler().runTaskTimer(
-				JavaPlugin.getPlugin(Plugin.class), saveRunnable, 1200 * 15,
+		Bukkit.getServer().getScheduler().runTaskTimer(JavaPlugin.getPlugin(Plugin.class), saveRunnable, 1200 * 15,
 				1200 * 15);
-		Bukkit.getServer().getScheduler().runTaskTimer(
-				JavaPlugin.getPlugin(Plugin.class), restartRunnable, 1200 * 5,
+		Bukkit.getServer().getScheduler().runTaskTimer(JavaPlugin.getPlugin(Plugin.class), restartRunnable, 1200 * 5,
 				1200 * 5);
 	}
 
@@ -89,24 +88,19 @@ public class Backup {
 		int hour = now.get(Calendar.HOUR_OF_DAY);
 		int min = now.get(Calendar.MINUTE);
 
-		File depth = new File("backups" + "/" + year + "/" + month + "/" + day
-				+ "/" + hour + "/" + min);
+		File depth = new File("backups" + "/" + year + "/" + month + "/" + day + "/" + hour + "/" + min);
 
 		if (!depth.exists()) {
 			depth.mkdirs();
 		}
 
-		Bukkit.getServer().dispatchCommand(
-				Bukkit.getServer().getConsoleSender(), "save-off");
+		Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "save-off");
 		ChatHandler.sendConsole(Bukkit.getConsoleSender(), "9", "Backing up world...");
 		if (Plugin.tm) {
-			Bukkit.getServer().dispatchCommand(
-					Bukkit.getServer().getConsoleSender(),
-					"tm abc §9Backing up world...");
+			Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "tm abc §9Backing up world...");
 		}
 		for (int i = 0; i < worldList.size(); i++) {
-			File worldFolder = new File(
-					worldList.get(i).getWorldFolder().toString());
+			File worldFolder = new File(worldList.get(i).getWorldFolder().toString());
 			try {
 				FileUtils.copyDirectoryToDirectory(worldFolder, depth);
 			} catch (IOException e) {
@@ -114,7 +108,6 @@ public class Backup {
 				e.printStackTrace();
 			}
 		}
-		Bukkit.getServer().dispatchCommand(
-				Bukkit.getServer().getConsoleSender(), "save-on");
+		Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "save-on");
 	}
 }
