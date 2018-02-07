@@ -22,3 +22,4 @@ hs_err_pid*
 # Other Files
 *.gitignore
 build.xml
+/bin/
