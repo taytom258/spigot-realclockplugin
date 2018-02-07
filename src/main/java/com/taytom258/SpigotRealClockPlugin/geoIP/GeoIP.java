@@ -1,7 +1,7 @@
 /**
  * 
  */
-package net.ddns.taytom258.SpigotRealClockPlugin.geoIP;
+package com.taytom258.SpigotRealClockPlugin.geoIP;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,9 +13,8 @@ import com.maxmind.geoip2.DatabaseReader;
 import com.maxmind.geoip2.exception.GeoIp2Exception;
 import com.maxmind.geoip2.model.CityResponse;
 import com.maxmind.geoip2.record.Location;
-
-import net.ddns.taytom258.SpigotRealClockPlugin.logger.LogHandler;
-import net.ddns.taytom258.SpigotRealClockPlugin.reference.Strings;
+import com.taytom258.SpigotRealClockPlugin.logger.LogHandler;
+import com.taytom258.SpigotRealClockPlugin.reference.Strings;
 
 /**
  * Handles reading of GeoLite databases <br>

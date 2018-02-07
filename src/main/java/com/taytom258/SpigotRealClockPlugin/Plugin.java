@@ -1,4 +1,4 @@
-package net.ddns.taytom258.SpigotRealClockPlugin;
+package com.taytom258.SpigotRealClockPlugin;
 
 import java.io.File;
 
@@ -6,17 +6,17 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import net.ddns.taytom258.SpigotRealClockPlugin.backup.Backup;
-import net.ddns.taytom258.SpigotRealClockPlugin.commands.ClockCommand;
-import net.ddns.taytom258.SpigotRealClockPlugin.commands.CommandHandler;
-import net.ddns.taytom258.SpigotRealClockPlugin.config.ConfigHandler;
-import net.ddns.taytom258.SpigotRealClockPlugin.config.Configuration;
-import net.ddns.taytom258.SpigotRealClockPlugin.geoIP.GeoIP;
-import net.ddns.taytom258.SpigotRealClockPlugin.listeners.JoinListener;
-import net.ddns.taytom258.SpigotRealClockPlugin.listeners.ListenerHandler;
-import net.ddns.taytom258.SpigotRealClockPlugin.listeners.PingProtocolEvent;
-import net.ddns.taytom258.SpigotRealClockPlugin.logger.LogHandler;
-import net.ddns.taytom258.SpigotRealClockPlugin.reference.Strings;
+import com.taytom258.SpigotRealClockPlugin.backup.Backup;
+import com.taytom258.SpigotRealClockPlugin.commands.ClockCommand;
+import com.taytom258.SpigotRealClockPlugin.commands.CommandHandler;
+import com.taytom258.SpigotRealClockPlugin.config.ConfigHandler;
+import com.taytom258.SpigotRealClockPlugin.config.Configuration;
+import com.taytom258.SpigotRealClockPlugin.geoIP.GeoIP;
+import com.taytom258.SpigotRealClockPlugin.listeners.JoinListener;
+import com.taytom258.SpigotRealClockPlugin.listeners.ListenerHandler;
+import com.taytom258.SpigotRealClockPlugin.listeners.PingProtocolEvent;
+import com.taytom258.SpigotRealClockPlugin.logger.LogHandler;
+import com.taytom258.SpigotRealClockPlugin.reference.Strings;
 
 /**
  * Main plugin class

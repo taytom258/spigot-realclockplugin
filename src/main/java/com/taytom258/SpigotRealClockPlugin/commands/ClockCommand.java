@@ -1,7 +1,7 @@
 /**
  * 
  */
-package net.ddns.taytom258.SpigotRealClockPlugin.commands;
+package com.taytom258.SpigotRealClockPlugin.commands;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,12 +17,12 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import net.ddns.taytom258.SpigotRealClockPlugin.Plugin;
-import net.ddns.taytom258.SpigotRealClockPlugin.chat.ChatHandler;
-import net.ddns.taytom258.SpigotRealClockPlugin.config.ConfigHandler;
-import net.ddns.taytom258.SpigotRealClockPlugin.config.Configuration;
-import net.ddns.taytom258.SpigotRealClockPlugin.logger.LogHandler;
-import net.ddns.taytom258.SpigotRealClockPlugin.reference.Strings;
+import com.taytom258.SpigotRealClockPlugin.Plugin;
+import com.taytom258.SpigotRealClockPlugin.chat.ChatHandler;
+import com.taytom258.SpigotRealClockPlugin.config.ConfigHandler;
+import com.taytom258.SpigotRealClockPlugin.config.Configuration;
+import com.taytom258.SpigotRealClockPlugin.logger.LogHandler;
+import com.taytom258.SpigotRealClockPlugin.reference.Strings;
 
 /**
  * Base clock command class

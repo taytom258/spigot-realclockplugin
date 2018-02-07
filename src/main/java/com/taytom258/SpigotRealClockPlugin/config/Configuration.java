@@ -1,7 +1,7 @@
 /**
  * 
  */
-package net.ddns.taytom258.SpigotRealClockPlugin.config;
+package com.taytom258.SpigotRealClockPlugin.config;
 
 /**
  * Holds various config variables

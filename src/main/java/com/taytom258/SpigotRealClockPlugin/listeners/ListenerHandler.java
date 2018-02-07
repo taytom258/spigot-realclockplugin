@@ -1,13 +1,13 @@
 /**
  * 
  */
-package net.ddns.taytom258.SpigotRealClockPlugin.listeners;
+package com.taytom258.SpigotRealClockPlugin.listeners;
 
 import org.bukkit.Server;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import net.ddns.taytom258.SpigotRealClockPlugin.Plugin;
+import com.taytom258.SpigotRealClockPlugin.Plugin;
 
 /**
  * Handles various basic listener methods for plugin

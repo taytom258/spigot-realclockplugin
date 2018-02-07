@@ -1,7 +1,7 @@
 /**
  * 
  */
-package net.ddns.taytom258.SpigotRealClockPlugin.backup;
+package com.taytom258.SpigotRealClockPlugin.backup;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,9 +13,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import net.ddns.taytom258.SpigotRealClockPlugin.Plugin;
-import net.ddns.taytom258.SpigotRealClockPlugin.chat.ChatHandler;
-import net.ddns.taytom258.SpigotRealClockPlugin.logger.LogHandler;
+import com.taytom258.SpigotRealClockPlugin.Plugin;
+import com.taytom258.SpigotRealClockPlugin.chat.ChatHandler;
+import com.taytom258.SpigotRealClockPlugin.logger.LogHandler;
 
 /**
  * @author taytom258

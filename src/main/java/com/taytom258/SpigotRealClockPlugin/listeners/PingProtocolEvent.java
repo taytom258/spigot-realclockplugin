@@ -1,7 +1,7 @@
 /**
  * 
  */
-package net.ddns.taytom258.SpigotRealClockPlugin.listeners;
+package com.taytom258.SpigotRealClockPlugin.listeners;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,9 +16,8 @@ import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketEvent;
 import com.comphenix.protocol.injector.GamePhase;
 import com.comphenix.protocol.wrappers.WrappedServerPing;
-
-import net.ddns.taytom258.SpigotRealClockPlugin.Plugin;
-import net.ddns.taytom258.SpigotRealClockPlugin.logger.LogHandler;
+import com.taytom258.SpigotRealClockPlugin.Plugin;
+import com.taytom258.SpigotRealClockPlugin.logger.LogHandler;
 
 /**
  * Handles changing the status screen for a server under certain conditions

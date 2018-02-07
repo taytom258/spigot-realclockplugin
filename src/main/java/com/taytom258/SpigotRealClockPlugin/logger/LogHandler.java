@@ -1,15 +1,15 @@
 /**
  * 
  */
-package net.ddns.taytom258.SpigotRealClockPlugin.logger;
+package com.taytom258.SpigotRealClockPlugin.logger;
 
 import java.util.logging.Logger;
 
 import org.bukkit.Server;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import net.ddns.taytom258.SpigotRealClockPlugin.Plugin;
-import net.ddns.taytom258.SpigotRealClockPlugin.config.Configuration;
+import com.taytom258.SpigotRealClockPlugin.Plugin;
+import com.taytom258.SpigotRealClockPlugin.config.Configuration;
 
 /**
  * Loghandler for printing errors and messages to server console. Automatically

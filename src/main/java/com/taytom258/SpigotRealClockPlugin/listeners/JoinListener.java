@@ -1,15 +1,15 @@
 /**
  * 
  */
-package net.ddns.taytom258.SpigotRealClockPlugin.listeners;
+package com.taytom258.SpigotRealClockPlugin.listeners;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerLoginEvent;
 
-import net.ddns.taytom258.SpigotRealClockPlugin.Plugin;
-import net.ddns.taytom258.SpigotRealClockPlugin.reference.Strings;
+import com.taytom258.SpigotRealClockPlugin.Plugin;
+import com.taytom258.SpigotRealClockPlugin.reference.Strings;
 
 /**
  * Listener to check for various conditions on player login event

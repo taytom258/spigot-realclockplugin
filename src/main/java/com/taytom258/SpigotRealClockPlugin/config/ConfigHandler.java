@@ -1,7 +1,7 @@
 /**
  * 
  */
-package net.ddns.taytom258.SpigotRealClockPlugin.config;
+package com.taytom258.SpigotRealClockPlugin.config;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,9 +9,9 @@ import java.io.IOException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import net.ddns.taytom258.SpigotRealClockPlugin.Plugin;
-import net.ddns.taytom258.SpigotRealClockPlugin.logger.LogHandler;
-import net.ddns.taytom258.SpigotRealClockPlugin.reference.Strings;
+import com.taytom258.SpigotRealClockPlugin.Plugin;
+import com.taytom258.SpigotRealClockPlugin.logger.LogHandler;
+import com.taytom258.SpigotRealClockPlugin.reference.Strings;
 
 /**
  * Handles configuration saving and reading

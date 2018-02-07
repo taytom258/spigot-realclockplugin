@@ -1,7 +1,7 @@
 /**
  * 
  */
-package net.ddns.taytom258.SpigotRealClockPlugin.chat;
+package com.taytom258.SpigotRealClockPlugin.chat;
 
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;

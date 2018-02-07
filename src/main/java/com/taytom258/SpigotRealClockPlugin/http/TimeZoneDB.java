@@ -1,7 +1,7 @@
 /**
  * 
  */
-package net.ddns.taytom258.SpigotRealClockPlugin.http;
+package com.taytom258.SpigotRealClockPlugin.http;
 
 import java.io.InputStream;
 import java.io.StringWriter;
@@ -27,7 +27,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.w3c.dom.Document;
 
-import net.ddns.taytom258.SpigotRealClockPlugin.config.Configuration;
+import com.taytom258.SpigotRealClockPlugin.config.Configuration;
 
 /**
  * Manages connections to TimeZone DB API using a private API key from

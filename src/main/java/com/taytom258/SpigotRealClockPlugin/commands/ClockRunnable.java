@@ -1,20 +1,19 @@
 /**
  * 
  */
-package net.ddns.taytom258.SpigotRealClockPlugin.commands;
+package com.taytom258.SpigotRealClockPlugin.commands;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 import org.apache.commons.lang.StringUtils;
 
 import com.maxmind.geoip2.exception.GeoIp2Exception;
-
-import net.ddns.taytom258.SpigotRealClockPlugin.chat.ChatHandler;
-import net.ddns.taytom258.SpigotRealClockPlugin.config.Configuration;
-import net.ddns.taytom258.SpigotRealClockPlugin.geoIP.GeoIP;
-import net.ddns.taytom258.SpigotRealClockPlugin.http.TimeZoneDB;
-import net.ddns.taytom258.SpigotRealClockPlugin.logger.LogHandler;
-import net.ddns.taytom258.SpigotRealClockPlugin.reference.Strings;
+import com.taytom258.SpigotRealClockPlugin.chat.ChatHandler;
+import com.taytom258.SpigotRealClockPlugin.config.Configuration;
+import com.taytom258.SpigotRealClockPlugin.geoIP.GeoIP;
+import com.taytom258.SpigotRealClockPlugin.http.TimeZoneDB;
+import com.taytom258.SpigotRealClockPlugin.logger.LogHandler;
+import com.taytom258.SpigotRealClockPlugin.reference.Strings;
 
 /**
  * Sections of clock command that need to run in a separate thread

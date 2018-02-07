@@ -1,12 +1,12 @@
 /**
  * 
  */
-package net.ddns.taytom258.SpigotRealClockPlugin.commands;
+package com.taytom258.SpigotRealClockPlugin.commands;
 
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import net.ddns.taytom258.SpigotRealClockPlugin.Plugin;
+import com.taytom258.SpigotRealClockPlugin.Plugin;
 
 /**
  * Handles various basic command methods for plugin
